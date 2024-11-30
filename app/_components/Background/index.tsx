@@ -5,22 +5,27 @@ import {
 	Float,
 	MeshTransmissionMaterial,
 	OrbitControls,
+	PerspectiveCamera,
 	TorusKnot,
 } from "@react-three/drei";
 import { Environment, Text } from "@react-three/drei";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { CuboidCollider, Physics, RigidBody } from "@react-three/rapier";
-import { useRef } from "react";
+import { useQueryState } from "nuqs";
+import { use, useEffect, useRef, useState } from "react";
 import { GridHelper, Group, type Mesh } from "three";
+import * as THREE from "three";
 
 export default function Background() {
+	const [page, setPage] = useQueryState("page");
+
 	return (
 		<>
 			<div className="w-[100vw] h-[100vh] fixed top-0 left-0 -z-10 bg-[#ffffff]">
 				<Canvas
 					gl={{ antialias: true }}
-					camera={{ position: [0, 0, 5] }}
 					shadows
+					camera={{ position: [0, 0, 5] }}
 				>
 					<Environment preset="studio" />
 					<color attach="background" args={["#ffffff"]} />
@@ -40,7 +45,7 @@ export default function Background() {
 								fontSize={2}
 								castShadow
 							>
-								AaaaAaaaa
+								Portfolio
 							</Text>
 							<ContactShadows
 								position-y={-2.0}
@@ -62,7 +67,8 @@ export default function Background() {
 						</RigidBody>
 						<CuboidCollider position={[0, -2.5, 0]} args={[10, 1, 10]} />
 					</Physics> */}
-					<OrbitControls />
+					{/* <OrbitControls /> */}
+					<Rig page={page} />
 				</Canvas>
 			</div>
 		</>
@@ -89,4 +95,12 @@ const RotatingBox = () => {
 			/>
 		</mesh>
 	);
+};
+
+const Rig = ({ page }: { page: string | null }) => {
+	const { camera } = useThree();
+	const target = (Number.parseInt(page || "1") - 1) * -10;
+	return useFrame(() => {
+		camera.position.y += (target - camera.position.y) * 0.05;
+	});
 };

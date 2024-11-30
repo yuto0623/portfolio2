@@ -7,7 +7,17 @@ import { parseAsInteger, useQueryState } from "nuqs";
 import { useEffect } from "react";
 
 export default function MainSlider() {
-	const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1));
+	const [page, setPage] = useQueryState(
+		"page",
+		parseAsInteger.withDefault(1).withOptions({
+			history: "push",
+			scroll: false,
+			shallow: false,
+			clearOnDefault: false,
+		}),
+	);
+
+	// console.log(page);
 
 	const handleChange = (swiper: SwiperType) => {
 		// console.log(swiper.activeIndex);

@@ -5,7 +5,9 @@ import Background from "./_components/ThreeCanvas";
 export default function Home() {
 	return (
 		<>
-			<Background />
+			<Suspense fallback={null}>
+				<Background />
+			</Suspense>
 			<main>
 				<Suspense fallback={null}>
 					<MainSlider />

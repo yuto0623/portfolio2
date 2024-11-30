@@ -1,15 +1,26 @@
 "use client";
 import Image from "next/image";
-import { Swiper, type SwiperProps, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from "swiper";
+import { Swiper, type SwiperProps, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
+import { parseAsInteger, useQueryState } from "nuqs";
+import { useEffect } from "react";
 
 export default function MainSlider() {
+	const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1));
+
+	const handleChange = (swiper: SwiperType) => {
+		// console.log(swiper.activeIndex);
+		setPage(swiper.activeIndex + 1);
+	};
+
 	const swiperProps: SwiperProps = {
 		direction: "vertical",
 		slidesPerView: 1,
-		onSlideChange: () => console.log("slide change"),
-		onSwiper: (swiper) => console.log(swiper),
+		onSlideChange: (swiper) => handleChange(swiper),
+		onSwiper: (swiper) => console.log("a"),
 		className: "h-[100dvh] w-[100dvw]",
+		initialSlide: page - 1,
 	};
 
 	return (

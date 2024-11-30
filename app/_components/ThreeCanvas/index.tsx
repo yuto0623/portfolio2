@@ -10,12 +10,10 @@ import {
 } from "@react-three/drei";
 import { Environment, Text } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { CuboidCollider, Physics, RigidBody } from "@react-three/rapier";
 import { useTheme } from "next-themes";
 import { useQueryState } from "nuqs";
 import { use, useEffect, useRef, useState } from "react";
 import { GridHelper, Group, type Mesh } from "three";
-import * as THREE from "three";
 
 export default function ThreeCanvas() {
 	const [page, setPage] = useQueryState("page");

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Background from "./_components/Background";
 import MainSlider from "./_components/MainSlider";
 

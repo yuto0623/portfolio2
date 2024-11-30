@@ -5,6 +5,8 @@ import { Swiper, type SwiperProps, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
 import { parseAsInteger, useQueryState } from "nuqs";
 import { useEffect } from "react";
+import { Mousewheel, Pagination } from "swiper/modules";
+import CustomPagination from "./CustomPagination";
 
 export default function MainSlider() {
 	const [page, setPage] = useQueryState(
@@ -29,24 +31,30 @@ export default function MainSlider() {
 		slidesPerView: 1,
 		onSlideChange: (swiper) => handleChange(swiper),
 		onSwiper: (swiper) => console.log("a"),
-		className: "h-[100dvh] w-[100dvw]",
 		initialSlide: page - 1,
+		mousewheel: true,
+		modules: [Pagination, Mousewheel],
+		pagination: true,
+		className: "h-[100dvh] w-[100dvw]",
 	};
 
 	return (
-		<Swiper {...swiperProps}>
-			<SwiperSlide>
-				<p>1Page</p>
-			</SwiperSlide>
-			<SwiperSlide>
-				<p>2Page</p>
-			</SwiperSlide>
-			<SwiperSlide>
-				<p>3Page</p>
-			</SwiperSlide>
-			<SwiperSlide>
-				<p>4Page</p>
-			</SwiperSlide>
-		</Swiper>
+		<>
+			<Swiper {...swiperProps}>
+				<SwiperSlide>
+					<p>1Page</p>
+				</SwiperSlide>
+				<SwiperSlide>
+					<p>2Page</p>
+				</SwiperSlide>
+				<SwiperSlide>
+					<p>3Page</p>
+				</SwiperSlide>
+				<SwiperSlide>
+					<p>4Page</p>
+				</SwiperSlide>
+				<CustomPagination page={page} />
+			</Swiper>
+		</>
 	);
 }

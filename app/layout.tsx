@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import ThemeButton from "./_components/ThemeButton";
 
 const geistSans = localFont({
 	src: "./_fonts/GeistVF.woff",
@@ -31,7 +32,10 @@ export default function RootLayout({
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
 				<ThemeProvider>
-					<NuqsAdapter>{children}</NuqsAdapter>
+					<NuqsAdapter>
+						{children}
+						<ThemeButton />
+					</NuqsAdapter>
 				</ThemeProvider>
 			</body>
 		</html>

@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { Swiper as SwiperType } from "swiper";
 import { Swiper, type SwiperProps, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
+import { useTheme } from "next-themes";
 import { parseAsInteger, useQueryState } from "nuqs";
 import { useEffect } from "react";
 import { Mousewheel, Pagination } from "swiper/modules";

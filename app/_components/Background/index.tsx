@@ -16,7 +16,7 @@ import { GridHelper, Group, type Mesh } from "three";
 export default function Background() {
 	return (
 		<>
-			<div className="w-[100vw] h-[100vh] fixed top-0 left-0 bg-[#ffffff]">
+			<div className="w-[100vw] h-[100vh] fixed top-0 left-0 -z-10 bg-[#ffffff]">
 				<Canvas
 					gl={{ antialias: true }}
 					camera={{ position: [0, 0, 5] }}
@@ -65,9 +65,6 @@ export default function Background() {
 					<OrbitControls />
 				</Canvas>
 			</div>
-			<p className="text-3xl w-[100vw] h-[100vh] flex items-center justify-center">
-				aaaaaaaaaa
-			</p>
 		</>
 	);
 }

@@ -11,24 +11,30 @@ import {
 import { Environment, Text } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { CuboidCollider, Physics, RigidBody } from "@react-three/rapier";
+import { useTheme } from "next-themes";
 import { useQueryState } from "nuqs";
 import { use, useEffect, useRef, useState } from "react";
 import { GridHelper, Group, type Mesh } from "three";
 import * as THREE from "three";
 
-export default function Background() {
+export default function ThreeCanvas() {
 	const [page, setPage] = useQueryState("page");
+	const { theme } = useTheme();
 
 	return (
 		<>
-			<div className="w-[100vw] h-[100vh] fixed top-0 left-0 -z-10 bg-[#ffffff]">
+			<div className="w-[100vw] h-[100vh] fixed top-0 left-0 -z-10">
 				<Canvas
 					gl={{ antialias: true }}
 					shadows
 					camera={{ position: [0, 0, 5] }}
 				>
 					<Environment preset="studio" />
-					<color attach="background" args={["#ffffff"]} />
+					<color
+						attach="background"
+						args={[`${theme === "dark" ? "#000000" : "#ffffff"}`]}
+						// args={["#ffffff"]}
+					/>
 					<spotLight
 						position={[20, 20, 10]}
 						penumbra={1}
@@ -41,7 +47,7 @@ export default function Background() {
 						<Float floatIntensity={2} castShadow>
 							<Text
 								position={[0, 0, -1.5]}
-								color={"black"}
+								color={theme === "dark" ? "#ffffff" : "#000000"}
 								fontSize={2}
 								castShadow
 							>
@@ -69,6 +75,7 @@ export default function Background() {
 					</Physics> */}
 					{/* <OrbitControls /> */}
 					<Rig page={page} />
+					{/* <FollowMouseLight /> */}
 				</Canvas>
 			</div>
 		</>
@@ -104,3 +111,10 @@ const Rig = ({ page }: { page: string | null }) => {
 		camera.position.y += (target - camera.position.y) * 0.05;
 	});
 };
+
+// const FollowMouseLight = () => {
+// 	const { pointer } = useThree();
+// 	return useFrame(() => {
+// 		console.log(pointer);
+// 	});
+// };

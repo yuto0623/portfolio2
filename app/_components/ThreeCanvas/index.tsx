@@ -17,7 +17,16 @@ import { GridHelper, Group, type Mesh } from "three";
 
 export default function ThreeCanvas() {
 	const [page, setPage] = useQueryState("page");
-	const { theme } = useTheme();
+	const { theme, resolvedTheme } = useTheme();
+	const [isTheme, setTheme] = useState<string | undefined>("");
+
+	useEffect(() => {
+		if (resolvedTheme === "system") {
+			setTheme(theme);
+		} else {
+			setTheme(resolvedTheme);
+		}
+	}, [theme, resolvedTheme]);
 
 	return (
 		<>
@@ -30,7 +39,7 @@ export default function ThreeCanvas() {
 					<Environment preset="studio" />
 					<color
 						attach="background"
-						args={[`${theme === "dark" ? "#000000" : "#ffffff"}`]}
+						args={[`${isTheme === "dark" ? "#000000" : "#ffffff"}`]}
 						// args={["#ffffff"]}
 					/>
 					<spotLight
@@ -45,7 +54,7 @@ export default function ThreeCanvas() {
 						<Float floatIntensity={2} castShadow>
 							<Text
 								position={[0, 0, -1.5]}
-								color={theme === "dark" ? "#ffffff" : "#000000"}
+								color={isTheme === "dark" ? "#ffffff" : "#000000"}
 								fontSize={2}
 								castShadow
 							>

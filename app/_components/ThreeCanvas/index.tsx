@@ -30,10 +30,8 @@ export default function ThreeCanvas() {
 		}
 		console.log(theme);
 		console.log(resolvedTheme);
-	}, [theme, resolvedTheme]);
 
-	useEffect(() => {
-		if (bgRef.current && isTheme) {
+		if (bgRef.current) {
 			gsap.to(bgRef.current, {
 				duration: 0.3,
 				r: isTheme === "dark" ? 0 : 1,
@@ -41,7 +39,7 @@ export default function ThreeCanvas() {
 				b: isTheme === "dark" ? 0 : 1,
 			});
 		}
-	}, [isTheme]);
+	}, [theme, resolvedTheme, isTheme]);
 
 	return (
 		<>

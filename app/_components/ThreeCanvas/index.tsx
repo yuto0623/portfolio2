@@ -55,6 +55,21 @@ export default function ThreeCanvas() {
 							<RotatingTorus />
 						</Float>
 					</group>
+					<group position={[0, -10, 0]}>
+						<Float floatIntensity={2} castShadow>
+							<TextEffect>Portfolio</TextEffect>
+							<ContactShadows
+								position-y={-2.0}
+								opacity={0.7}
+								scale={7}
+								blur={2.4}
+								color={"#000"}
+								far={10}
+								resolution={256}
+							/>
+							<RotatingTorus />
+						</Float>
+					</group>
 					{/* <Physics>
 						<RigidBody position={[-3, 2, 0]}>
 							<TorusKnot scale={0.5}>

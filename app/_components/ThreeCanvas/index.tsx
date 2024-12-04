@@ -41,6 +41,8 @@ export default function ThreeCanvas() {
 				g: currentTheme === "dark" ? 0 : 1,
 				b: currentTheme === "dark" ? 0 : 1,
 			});
+		} else {
+			console.log("bgRef.current is null");
 		}
 	}, [theme, resolvedTheme]);
 

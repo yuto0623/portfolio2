@@ -7,15 +7,31 @@ import {
 	OrbitControls,
 	PerspectiveCamera,
 	TorusKnot,
+	useTexture,
 } from "@react-three/drei";
 import { Environment, Text } from "@react-three/drei";
-import { Canvas, type MeshProps, useFrame, useThree } from "@react-three/fiber";
+import {
+	Canvas,
+	type MeshProps,
+	useFrame,
+	useLoader,
+	useThree,
+} from "@react-three/fiber";
 import { useTheme } from "next-themes";
 import { useQueryState } from "nuqs";
 import { use, useEffect, useRef, useState } from "react";
-import { type Color, GridHelper, Group, type Mesh } from "three";
+import {
+	CanvasTexture,
+	type Color,
+	GridHelper,
+	Group,
+	type Mesh,
+	TextureLoader,
+} from "three";
 import BgEffect from "./BgEffect";
 import RotatingTorus from "./RotatingTorus";
+import Img from "./WorksImg";
+import WorksImg from "./WorksImg";
 
 export default function ThreeCanvas() {
 	const [page, setPage] = useQueryState("page");
@@ -42,7 +58,7 @@ export default function ThreeCanvas() {
 					<directionalLight color={"white"} position={[0, 5, 5]} castShadow />
 					<group>
 						<Float floatIntensity={2} castShadow>
-							<TextEffect>Portfolio</TextEffect>
+							<TextEffect fontSize={2}>Portfolio</TextEffect>
 							<ContactShadows
 								position-y={-2.0}
 								opacity={0.7}
@@ -55,49 +71,10 @@ export default function ThreeCanvas() {
 							<RotatingTorus />
 						</Float>
 					</group>
-					<group position={[0, -10, 0]}>
+					<group position={[-3, -7, 0]}>
 						<Float floatIntensity={2} castShadow>
-							<TextEffect>Works</TextEffect>
-							<ContactShadows
-								position-y={-2.0}
-								opacity={0.7}
-								scale={7}
-								blur={2.4}
-								color={"#000"}
-								far={10}
-								resolution={256}
-							/>
-							<RotatingTorus />
-						</Float>
-					</group>
-					<group position={[0, -20, 0]}>
-						<Float floatIntensity={2} castShadow>
-							<TextEffect>About</TextEffect>
-							<ContactShadows
-								position-y={-2.0}
-								opacity={0.7}
-								scale={7}
-								blur={2.4}
-								color={"#000"}
-								far={10}
-								resolution={256}
-							/>
-							<RotatingTorus />
-						</Float>
-					</group>
-					<group position={[0, -30, 0]}>
-						<Float floatIntensity={2} castShadow>
-							<TextEffect>Contact</TextEffect>
-							<ContactShadows
-								position-y={-2.0}
-								opacity={0.7}
-								scale={7}
-								blur={2.4}
-								color={"#000"}
-								far={10}
-								resolution={256}
-							/>
-							<RotatingTorus />
+							<TextEffect fontSize={1}>Works</TextEffect>
+							<WorksImg />
 						</Float>
 					</group>
 					{/* <Physics>
@@ -132,7 +109,10 @@ const Rig = ({ page }: { page: string | null }) => {
 // 	});
 // };
 
-const TextEffect = ({ children }: { children: React.ReactNode }) => {
+const TextEffect = ({
+	children,
+	fontSize,
+}: { children: React.ReactNode; fontSize: number }) => {
 	const [isTheme, setIsTheme] = useState<string | undefined>("");
 	const { theme, resolvedTheme } = useTheme();
 
@@ -150,7 +130,7 @@ const TextEffect = ({ children }: { children: React.ReactNode }) => {
 		<Text
 			color={isTheme === "dark" ? "#ffffff" : "#000000"}
 			position={[0, 0, -1.5]}
-			fontSize={2}
+			fontSize={fontSize}
 			castShadow
 		>
 			{children}

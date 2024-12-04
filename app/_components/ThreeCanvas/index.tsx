@@ -10,11 +10,12 @@ import {
 } from "@react-three/drei";
 import { Environment, Text } from "@react-three/drei";
 import { Canvas, type MeshProps, useFrame, useThree } from "@react-three/fiber";
-import { gsap } from "gsap";
 import { useTheme } from "next-themes";
 import { useQueryState } from "nuqs";
 import { use, useEffect, useRef, useState } from "react";
 import { type Color, GridHelper, Group, type Mesh } from "three";
+import BgEffect from "./BgEffect";
+import RotatingTorus from "./RotatingTorus";
 
 export default function ThreeCanvas() {
 	const [page, setPage] = useQueryState("page");
@@ -51,7 +52,7 @@ export default function ThreeCanvas() {
 								far={10}
 								resolution={256}
 							/>
-							<RotatingBox />
+							<RotatingTorus />
 						</Float>
 					</group>
 					{/* <Physics>
@@ -70,28 +71,6 @@ export default function ThreeCanvas() {
 		</>
 	);
 }
-
-const RotatingBox = () => {
-	const meshRef = useRef<Mesh>(null);
-
-	useFrame(() => {
-		if (meshRef.current) {
-			meshRef.current.rotation.x += 0.003;
-			meshRef.current.rotation.y += 0.003;
-		}
-	});
-
-	return (
-		<mesh ref={meshRef} castShadow>
-			<torusGeometry />
-			<MeshTransmissionMaterial
-				backside
-				backsideThickness={1}
-				thickness={0.2}
-			/>
-		</mesh>
-	);
-};
 
 const Rig = ({ page }: { page: string | null }) => {
 	const { camera } = useThree();
@@ -131,37 +110,5 @@ const TextEffect = ({ children }: { children: React.ReactNode }) => {
 		>
 			{children}
 		</Text>
-	);
-};
-
-const BgEffect = () => {
-	const [isTheme, setIsTheme] = useState<string | undefined>("");
-	const { theme, resolvedTheme } = useTheme();
-	const bgRef = useRef<Color>(null);
-
-	useEffect(() => {
-		let currentTheme: string | undefined;
-		if (resolvedTheme === "system") {
-			currentTheme = theme;
-		} else {
-			currentTheme = resolvedTheme;
-		}
-		setIsTheme(currentTheme);
-
-		if (bgRef.current) {
-			gsap.to(bgRef.current, {
-				duration: 0.3,
-				r: currentTheme === "dark" ? 0 : 1,
-				g: currentTheme === "dark" ? 0 : 1,
-				b: currentTheme === "dark" ? 0 : 1,
-			});
-		}
-	}, [theme, resolvedTheme]);
-	return (
-		<color
-			attach="background"
-			// args={[`${isTheme === "dark" ? "#000000" : "#ffffff"}`]}
-			ref={bgRef}
-		/>
 	);
 };

@@ -33,19 +33,17 @@ export default function ThreeCanvas() {
 
 		console.log(theme);
 		console.log(resolvedTheme);
-		document.addEventListener("DOMContentLoaded", () => {
-			console.log("DOMContentLoaded");
-			if (bgRef.current) {
-				gsap.to(bgRef.current, {
-					duration: 0.3,
-					r: currentTheme === "dark" ? 0 : 1,
-					g: currentTheme === "dark" ? 0 : 1,
-					b: currentTheme === "dark" ? 0 : 1,
-				});
-			} else {
-				console.log("bgRef.current is null");
-			}
-		});
+
+		if (bgRef.current) {
+			gsap.to(bgRef.current, {
+				duration: 0.3,
+				r: currentTheme === "dark" ? 0 : 1,
+				g: currentTheme === "dark" ? 0 : 1,
+				b: currentTheme === "dark" ? 0 : 1,
+			});
+		} else {
+			console.log("bgRef.current is null");
+		}
 	}, [theme, resolvedTheme]);
 
 	return (

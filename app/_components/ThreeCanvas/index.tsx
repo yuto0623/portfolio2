@@ -33,7 +33,7 @@ export default function ThreeCanvas() {
 	}, [theme, resolvedTheme]);
 
 	useEffect(() => {
-		if (bgRef.current) {
+		if (bgRef.current && isTheme) {
 			gsap.to(bgRef.current, {
 				duration: 0.3,
 				r: isTheme === "dark" ? 0 : 1,

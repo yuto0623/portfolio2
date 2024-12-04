@@ -44,7 +44,7 @@ export default function ThreeCanvas() {
 		} else {
 			console.log("bgRef.current is null");
 		}
-	}, [theme, resolvedTheme]);
+	});
 
 	return (
 		<>

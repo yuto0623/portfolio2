@@ -18,13 +18,13 @@ import { GridHelper, Group, type Mesh } from "three";
 export default function ThreeCanvas() {
 	const [page, setPage] = useQueryState("page");
 	const { theme, resolvedTheme } = useTheme();
-	const [isTheme, setTheme] = useState<string | undefined>("");
+	const [isTheme, setIsTheme] = useState<string | undefined>("");
 
 	useEffect(() => {
 		if (resolvedTheme === "system") {
-			setTheme(theme);
+			setIsTheme(theme);
 		} else {
-			setTheme(resolvedTheme);
+			setIsTheme(resolvedTheme);
 		}
 	}, [theme, resolvedTheme]);
 

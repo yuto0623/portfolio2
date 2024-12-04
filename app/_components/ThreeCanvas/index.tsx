@@ -25,8 +25,10 @@ export default function ThreeCanvas() {
 	useEffect(() => {
 		if (resolvedTheme === "system") {
 			setIsTheme(theme);
+			console.log(theme);
 		} else {
 			setIsTheme(resolvedTheme);
+			console.log(resolvedTheme);
 		}
 	}, [theme, resolvedTheme]);
 

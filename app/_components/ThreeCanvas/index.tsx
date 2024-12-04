@@ -20,6 +20,7 @@ export default function ThreeCanvas() {
 	const [page, setPage] = useQueryState("page");
 	const { theme, resolvedTheme } = useTheme();
 	const [isTheme, setIsTheme] = useState<string | undefined>("");
+	const [isSet, setIsSet] = useState(false);
 	const bgRef = useRef<Color>(null);
 
 	useEffect(() => {
@@ -34,15 +35,28 @@ export default function ThreeCanvas() {
 		console.log(theme);
 		console.log(resolvedTheme);
 
-		if (bgRef.current) {
-			gsap.to(bgRef.current, {
-				duration: 0.3,
-				r: currentTheme === "dark" ? 0 : 1,
-				g: currentTheme === "dark" ? 0 : 1,
-				b: currentTheme === "dark" ? 0 : 1,
-			});
+		if (!isSet) {
+			if (bgRef.current) {
+				gsap.set(bgRef.current, {
+					duration: 0.3,
+					r: currentTheme === "dark" ? 0 : 1,
+					g: currentTheme === "dark" ? 0 : 1,
+					b: currentTheme === "dark" ? 0 : 1,
+				});
+			}
+		} else {
+			if (bgRef.current) {
+				gsap.to(bgRef.current, {
+					duration: 0.3,
+					r: currentTheme === "dark" ? 0 : 1,
+					g: currentTheme === "dark" ? 0 : 1,
+					b: currentTheme === "dark" ? 0 : 1,
+				});
+			}
 		}
-	}, [theme, resolvedTheme]);
+
+		setIsSet(true);
+	}, [theme, resolvedTheme, isSet]);
 
 	return (
 		<>

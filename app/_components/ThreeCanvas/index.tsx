@@ -10,15 +10,17 @@ import {
 } from "@react-three/drei";
 import { Environment, Text } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { gsap } from "gsap";
 import { useTheme } from "next-themes";
 import { useQueryState } from "nuqs";
 import { use, useEffect, useRef, useState } from "react";
-import { GridHelper, Group, type Mesh } from "three";
+import { type Color, GridHelper, Group, type Mesh } from "three";
 
 export default function ThreeCanvas() {
 	const [page, setPage] = useQueryState("page");
 	const { theme, resolvedTheme } = useTheme();
 	const [isTheme, setIsTheme] = useState<string | undefined>("");
+	const bgRef = useRef<Color>(null);
 
 	useEffect(() => {
 		if (resolvedTheme === "system") {
@@ -27,6 +29,17 @@ export default function ThreeCanvas() {
 			setIsTheme(resolvedTheme);
 		}
 	}, [theme, resolvedTheme]);
+
+	useEffect(() => {
+		if (bgRef.current) {
+			gsap.to(bgRef.current, {
+				duration: 0.3,
+				r: isTheme === "dark" ? 0 : 1,
+				g: isTheme === "dark" ? 0 : 1,
+				b: isTheme === "dark" ? 0 : 1,
+			});
+		}
+	}, [isTheme]);
 
 	return (
 		<>
@@ -39,8 +52,8 @@ export default function ThreeCanvas() {
 					<Environment preset="studio" />
 					<color
 						attach="background"
-						args={[`${isTheme === "dark" ? "#000000" : "#ffffff"}`]}
-						// args={["#ffffff"]}
+						// args={[`${isTheme === "dark" ? "#000000" : "#ffffff"}`]}
+						ref={bgRef}
 					/>
 					<spotLight
 						position={[20, 20, 10]}

@@ -9,7 +9,7 @@ import {
 	TorusKnot,
 } from "@react-three/drei";
 import { Environment, Text } from "@react-three/drei";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, type MeshProps, useFrame, useThree } from "@react-three/fiber";
 import { gsap } from "gsap";
 import { useTheme } from "next-themes";
 import { useQueryState } from "nuqs";
@@ -20,31 +20,6 @@ export default function ThreeCanvas() {
 	const [page, setPage] = useQueryState("page");
 	const { theme, resolvedTheme } = useTheme();
 	const [isTheme, setIsTheme] = useState<string | undefined>("");
-	const bgRef = useRef<Color>(null);
-
-	useEffect(() => {
-		let currentTheme: string | undefined;
-		if (resolvedTheme === "system") {
-			currentTheme = theme;
-		} else {
-			currentTheme = resolvedTheme;
-		}
-		setIsTheme(currentTheme);
-
-		console.log(theme);
-		console.log(resolvedTheme);
-
-		if (bgRef.current) {
-			gsap.to(bgRef.current, {
-				duration: 0.3,
-				r: currentTheme === "dark" ? 0 : 1,
-				g: currentTheme === "dark" ? 0 : 1,
-				b: currentTheme === "dark" ? 0 : 1,
-			});
-		} else {
-			console.log("bgRef.current is null");
-		}
-	});
 
 	return (
 		<>
@@ -55,11 +30,7 @@ export default function ThreeCanvas() {
 					camera={{ position: [0, 0, 5] }}
 				>
 					<Environment preset="studio" />
-					<color
-						attach="background"
-						// args={[`${isTheme === "dark" ? "#000000" : "#ffffff"}`]}
-						ref={bgRef}
-					/>
+					<BgEffect />
 					<spotLight
 						position={[20, 20, 10]}
 						penumbra={1}
@@ -70,14 +41,7 @@ export default function ThreeCanvas() {
 					<directionalLight color={"white"} position={[0, 5, 5]} castShadow />
 					<group>
 						<Float floatIntensity={2} castShadow>
-							<Text
-								position={[0, 0, -1.5]}
-								color={isTheme === "dark" ? "#ffffff" : "#000000"}
-								fontSize={2}
-								castShadow
-							>
-								Portfolio
-							</Text>
+							<TextEffect>Portfolio</TextEffect>
 							<ContactShadows
 								position-y={-2.0}
 								opacity={0.7}
@@ -143,3 +107,61 @@ const Rig = ({ page }: { page: string | null }) => {
 // 		console.log(pointer);
 // 	});
 // };
+
+const TextEffect = ({ children }: { children: React.ReactNode }) => {
+	const [isTheme, setIsTheme] = useState<string | undefined>("");
+	const { theme, resolvedTheme } = useTheme();
+
+	useEffect(() => {
+		let currentTheme: string | undefined;
+		if (resolvedTheme === "system") {
+			currentTheme = theme;
+		} else {
+			currentTheme = resolvedTheme;
+		}
+		setIsTheme(currentTheme);
+	}, [theme, resolvedTheme]);
+
+	return (
+		<Text
+			color={isTheme === "dark" ? "#ffffff" : "#000000"}
+			position={[0, 0, -1.5]}
+			fontSize={2}
+			castShadow
+		>
+			{children}
+		</Text>
+	);
+};
+
+const BgEffect = () => {
+	const [isTheme, setIsTheme] = useState<string | undefined>("");
+	const { theme, resolvedTheme } = useTheme();
+	const bgRef = useRef<Color>(null);
+
+	useEffect(() => {
+		let currentTheme: string | undefined;
+		if (resolvedTheme === "system") {
+			currentTheme = theme;
+		} else {
+			currentTheme = resolvedTheme;
+		}
+		setIsTheme(currentTheme);
+
+		if (bgRef.current) {
+			gsap.to(bgRef.current, {
+				duration: 0.3,
+				r: currentTheme === "dark" ? 0 : 1,
+				g: currentTheme === "dark" ? 0 : 1,
+				b: currentTheme === "dark" ? 0 : 1,
+			});
+		}
+	}, [theme, resolvedTheme]);
+	return (
+		<color
+			attach="background"
+			// args={[`${isTheme === "dark" ? "#000000" : "#ffffff"}`]}
+			ref={bgRef}
+		/>
+	);
+};

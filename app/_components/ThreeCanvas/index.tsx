@@ -34,12 +34,14 @@ export default function ThreeCanvas() {
 		console.log(theme);
 		console.log(resolvedTheme);
 
-		gsap.to(bgRef.current, {
-			duration: 0.3,
-			r: currentTheme === "dark" ? 0 : 1,
-			g: currentTheme === "dark" ? 0 : 1,
-			b: currentTheme === "dark" ? 0 : 1,
-		});
+		if (bgRef.current) {
+			gsap.to(bgRef.current, {
+				duration: 0.3,
+				r: currentTheme === "dark" ? 0 : 1,
+				g: currentTheme === "dark" ? 0 : 1,
+				b: currentTheme === "dark" ? 0 : 1,
+			});
+		}
 	}, [theme, resolvedTheme]);
 
 	return (

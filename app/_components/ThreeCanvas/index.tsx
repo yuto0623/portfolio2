@@ -23,23 +23,26 @@ export default function ThreeCanvas() {
 	const bgRef = useRef<Color>(null);
 
 	useEffect(() => {
+		let currentTheme: string | undefined;
 		if (resolvedTheme === "system") {
-			setIsTheme(theme);
+			currentTheme = theme;
 		} else {
-			setIsTheme(resolvedTheme);
+			currentTheme = resolvedTheme;
 		}
+		setIsTheme(currentTheme);
+
 		console.log(theme);
 		console.log(resolvedTheme);
 
 		if (bgRef.current) {
 			gsap.to(bgRef.current, {
 				duration: 0.3,
-				r: isTheme === "dark" ? 0 : 1,
-				g: isTheme === "dark" ? 0 : 1,
-				b: isTheme === "dark" ? 0 : 1,
+				r: currentTheme === "dark" ? 0 : 1,
+				g: currentTheme === "dark" ? 0 : 1,
+				b: currentTheme === "dark" ? 0 : 1,
 			});
 		}
-	}, [theme, resolvedTheme, isTheme]);
+	}, [theme, resolvedTheme]);
 
 	return (
 		<>

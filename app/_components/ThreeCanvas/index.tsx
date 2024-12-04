@@ -57,7 +57,37 @@ export default function ThreeCanvas() {
 					</group>
 					<group position={[0, -10, 0]}>
 						<Float floatIntensity={2} castShadow>
-							<TextEffect>Portfolio</TextEffect>
+							<TextEffect>Works</TextEffect>
+							<ContactShadows
+								position-y={-2.0}
+								opacity={0.7}
+								scale={7}
+								blur={2.4}
+								color={"#000"}
+								far={10}
+								resolution={256}
+							/>
+							<RotatingTorus />
+						</Float>
+					</group>
+					<group position={[0, -20, 0]}>
+						<Float floatIntensity={2} castShadow>
+							<TextEffect>About</TextEffect>
+							<ContactShadows
+								position-y={-2.0}
+								opacity={0.7}
+								scale={7}
+								blur={2.4}
+								color={"#000"}
+								far={10}
+								resolution={256}
+							/>
+							<RotatingTorus />
+						</Float>
+					</group>
+					<group position={[0, -30, 0]}>
+						<Float floatIntensity={2} castShadow>
+							<TextEffect>Contact</TextEffect>
 							<ContactShadows
 								position-y={-2.0}
 								opacity={0.7}

@@ -30,15 +30,15 @@ export default function ThreeCanvas() {
 					shadows
 					camera={{ position: [0, 0, 5] }}
 				>
-					<Environment preset="studio" />
 					<BgEffect />
+					<Environment preset="studio" />
+					<ambientLight intensity={0.1} />
 					<spotLight
 						position={[20, 20, 10]}
 						penumbra={1}
 						castShadow
 						angle={0.2}
 					/>
-					<ambientLight intensity={0.1} />
 					<directionalLight color={"white"} position={[0, 5, 5]} castShadow />
 					<group>
 						<Float floatIntensity={2} castShadow>

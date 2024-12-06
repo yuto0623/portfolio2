@@ -6,12 +6,15 @@ import {
 	MeshTransmissionMaterial,
 	OrbitControls,
 	PerspectiveCamera,
+	Scroll,
+	ScrollControls,
 	TorusKnot,
 	useTexture,
 } from "@react-three/drei";
 import { Environment, Text } from "@react-three/drei";
 import {
 	Canvas,
+	type GroupProps,
 	type MeshProps,
 	useFrame,
 	useLoader,
@@ -19,12 +22,12 @@ import {
 } from "@react-three/fiber";
 import { useTheme } from "next-themes";
 import { useQueryState } from "nuqs";
-import { use, useEffect, useRef, useState } from "react";
+import { type RefObject, use, useEffect, useRef, useState } from "react";
 import {
 	CanvasTexture,
 	type Color,
 	GridHelper,
-	Group,
+	type Group,
 	type Mesh,
 	TextureLoader,
 } from "three";
@@ -32,11 +35,14 @@ import BgEffect from "./BgEffect";
 import RotatingTorus from "./RotatingTorus";
 import Img from "./WorksImg";
 import WorksImg from "./WorksImg";
+import WorksSlider from "./WorksSlider";
 
 export default function ThreeCanvas() {
 	const [page, setPage] = useQueryState("page");
+	const [work, setWork] = useQueryState("work");
 	const { theme, resolvedTheme } = useTheme();
 	const [isTheme, setIsTheme] = useState<string | undefined>("");
+	const worksRef = useRef<Group>(null);
 
 	return (
 		<>
@@ -74,8 +80,10 @@ export default function ThreeCanvas() {
 					<group position={[-3, -7, 0]}>
 						<Float floatIntensity={2} castShadow>
 							<TextEffect fontSize={1}>Works</TextEffect>
-							<WorksImg />
 						</Float>
+						<group ref={worksRef}>
+							<WorksSlider />
+						</group>
 					</group>
 					{/* <Physics>
 						<RigidBody position={[-3, 2, 0]}>
@@ -87,6 +95,7 @@ export default function ThreeCanvas() {
 					</Physics> */}
 					{/* <OrbitControls /> */}
 					<Rig page={page} />
+					<WorksRig work={work} worksRef={worksRef} />
 					{/* <FollowMouseLight /> */}
 				</Canvas>
 			</div>
@@ -99,6 +108,19 @@ const Rig = ({ page }: { page: string | null }) => {
 	const target = (Number.parseInt(page || "1") - 1) * -10;
 	return useFrame(() => {
 		camera.position.y += (target - camera.position.y) * 0.05;
+	});
+};
+
+const WorksRig = ({
+	work,
+	worksRef,
+}: { work: string | null; worksRef: RefObject<Group> }) => {
+	const { camera } = useThree();
+	const target = (Number.parseInt(work || "1") - 1) * -10;
+	return useFrame(() => {
+		if (!worksRef.current) return;
+		worksRef.current.position.x +=
+			(target - worksRef.current.position.x) * 0.05;
 	});
 };
 

@@ -33,8 +33,6 @@ import {
 } from "three";
 import BgEffect from "./BgEffect";
 import RotatingTorus from "./RotatingTorus";
-import Img from "./WorksImg";
-import WorksImg from "./WorksImg";
 
 export default function ThreeCanvas() {
 	const [page, setPage] = useQueryState("page");
@@ -52,7 +50,7 @@ export default function ThreeCanvas() {
 					camera={{ position: [0, 0, 5] }}
 				>
 					<BgEffect />
-					<ScrollControls pages={3} damping={0.1}>
+					<ScrollControls pages={3} damping={0.05}>
 						<Scroll>
 							<Environment preset="studio" />
 							<ambientLight intensity={0.1} />
@@ -82,7 +80,11 @@ export default function ThreeCanvas() {
 									<RotatingTorus />
 								</Float>
 							</group>
-							<group position={[-3, -7, 0]}>
+							{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+							<group
+								position={[-3, -7, 0]}
+								onClick={() => console.log("works")}
+							>
 								<Float floatIntensity={2} castShadow>
 									<TextEffect fontSize={1}>Works</TextEffect>
 								</Float>
@@ -99,6 +101,12 @@ export default function ThreeCanvas() {
 							<Rig page={page} />
 							<WorksRig work={work} worksRef={worksRef} />
 							{/* <FollowMouseLight /> */}
+						</Scroll>
+						<Scroll html>
+							<div className="absolute top-[110dvh] w-[100dvw] overflow-scroll">
+								Scroll
+								<p>fdafasfdafafafafadsfafdasfdasfadsfdasfadsfa</p>
+							</div>
 						</Scroll>
 					</ScrollControls>
 				</Canvas>

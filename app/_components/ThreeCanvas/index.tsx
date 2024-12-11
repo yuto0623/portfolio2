@@ -35,7 +35,6 @@ import BgEffect from "./BgEffect";
 import RotatingTorus from "./RotatingTorus";
 import Img from "./WorksImg";
 import WorksImg from "./WorksImg";
-import WorksSlider from "./WorksSlider";
 
 export default function ThreeCanvas() {
 	const [page, setPage] = useQueryState("page");
@@ -53,50 +52,55 @@ export default function ThreeCanvas() {
 					camera={{ position: [0, 0, 5] }}
 				>
 					<BgEffect />
-					<Environment preset="studio" />
-					<ambientLight intensity={0.1} />
-					<spotLight
-						position={[20, 20, 10]}
-						penumbra={1}
-						castShadow
-						angle={0.2}
-					/>
-					<directionalLight color={"white"} position={[0, 5, 5]} castShadow />
-					<group>
-						<Float floatIntensity={2} castShadow>
-							<TextEffect fontSize={2}>Portfolio</TextEffect>
-							<ContactShadows
-								position-y={-2.0}
-								opacity={0.7}
-								scale={7}
-								blur={2.4}
-								color={"#000"}
-								far={10}
-								resolution={256}
+					<ScrollControls pages={3} damping={0.1}>
+						<Scroll>
+							<Environment preset="studio" />
+							<ambientLight intensity={0.1} />
+							<spotLight
+								position={[20, 20, 10]}
+								penumbra={1}
+								castShadow
+								angle={0.2}
 							/>
-							<RotatingTorus />
-						</Float>
-					</group>
-					<group position={[-3, -7, 0]}>
-						<Float floatIntensity={2} castShadow>
-							<TextEffect fontSize={1}>Works</TextEffect>
-						</Float>
-						<group ref={worksRef}>
-							<WorksSlider />
-						</group>
-					</group>
-					{/* <Physics>
+							<directionalLight
+								color={"white"}
+								position={[0, 5, 5]}
+								castShadow
+							/>
+							<group>
+								<Float floatIntensity={2} castShadow>
+									<TextEffect fontSize={2}>Portfolio</TextEffect>
+									<ContactShadows
+										position-y={-2.0}
+										opacity={0.7}
+										scale={7}
+										blur={2.4}
+										color={"#000"}
+										far={10}
+										resolution={256}
+									/>
+									<RotatingTorus />
+								</Float>
+							</group>
+							<group position={[-3, -7, 0]}>
+								<Float floatIntensity={2} castShadow>
+									<TextEffect fontSize={1}>Works</TextEffect>
+								</Float>
+							</group>
+							{/* <Physics>
 						<RigidBody position={[-3, 2, 0]}>
-							<TorusKnot scale={0.5}>
-								<meshStandardMaterial color="#ccc" />
-							</TorusKnot>
+						<TorusKnot scale={0.5}>
+						<meshStandardMaterial color="#ccc" />
+						</TorusKnot>
 						</RigidBody>
 						<CuboidCollider position={[0, -2.5, 0]} args={[10, 1, 10]} />
-					</Physics> */}
-					{/* <OrbitControls /> */}
-					<Rig page={page} />
-					<WorksRig work={work} worksRef={worksRef} />
-					{/* <FollowMouseLight /> */}
+						</Physics> */}
+							{/* <OrbitControls /> */}
+							<Rig page={page} />
+							<WorksRig work={work} worksRef={worksRef} />
+							{/* <FollowMouseLight /> */}
+						</Scroll>
+					</ScrollControls>
 				</Canvas>
 			</div>
 		</>

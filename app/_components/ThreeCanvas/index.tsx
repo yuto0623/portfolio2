@@ -36,6 +36,7 @@ import RotatingTorus from "./RotatingTorus";
 import Img from "./WorksImg";
 import WorksImg from "./WorksImg";
 import WorksSlider from "./WorksSlider";
+import Rig from "./Rig";
 
 export default function ThreeCanvas() {
 	const [page, setPage] = useQueryState("page");
@@ -102,14 +103,6 @@ export default function ThreeCanvas() {
 		</>
 	);
 }
-
-const Rig = ({ page }: { page: string | null }) => {
-	const { camera } = useThree();
-	const target = (Number.parseInt(page || "1") - 1) * -10;
-	return useFrame(() => {
-		camera.position.y += (target - camera.position.y) * 0.05;
-	});
-};
 
 const WorksRig = ({
 	work,

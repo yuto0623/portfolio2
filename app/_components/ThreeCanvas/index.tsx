@@ -30,6 +30,7 @@ import {
 	type Group,
 	type Mesh,
 	TextureLoader,
+	type Vector3,
 } from "three";
 import BgEffect from "./BgEffect";
 import RotatingTorus from "./RotatingTorus";
@@ -47,7 +48,9 @@ export default function ThreeCanvas() {
 				<Canvas
 					gl={{ antialias: true }}
 					shadows
-					camera={{ position: [0, 0, 5] }}
+					camera={{
+						position: [0, 0, 5],
+					}}
 				>
 					<BgEffect />
 					<ScrollControls pages={3} damping={0.05}>
@@ -82,11 +85,26 @@ export default function ThreeCanvas() {
 							</group>
 							{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
 							<group
-								position={[-3, -7, 0]}
+								position={[-5, -7, 0]}
 								onClick={() => console.log("works")}
 							>
 								<Float floatIntensity={2} castShadow>
 									<TextEffect fontSize={1}>Works</TextEffect>
+								</Float>
+							</group>
+							{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+							<group position={[2, -9, 0]} onClick={() => console.log("About")}>
+								<Float floatIntensity={2} castShadow>
+									<TextEffect fontSize={1}>About</TextEffect>
+								</Float>
+							</group>
+							{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+							<group
+								position={[-3, -12, 0]}
+								onClick={() => console.log("Contact")}
+							>
+								<Float floatIntensity={2} castShadow>
+									<TextEffect fontSize={1}>Contact</TextEffect>
 								</Float>
 							</group>
 							{/* <Physics>
@@ -98,16 +116,16 @@ export default function ThreeCanvas() {
 						<CuboidCollider position={[0, -2.5, 0]} args={[10, 1, 10]} />
 						</Physics> */}
 							{/* <OrbitControls /> */}
-							<Rig page={page} />
+							<Rig />
 							<WorksRig work={work} worksRef={worksRef} />
 							{/* <FollowMouseLight /> */}
 						</Scroll>
-						<Scroll html>
+						{/* <Scroll html>
 							<div className="absolute top-[110dvh] w-[100dvw] overflow-scroll">
 								Scroll
 								<p>fdafasfdafafafafadsfafdasfdasfadsfdasfadsfa</p>
 							</div>
-						</Scroll>
+						</Scroll> */}
 					</ScrollControls>
 				</Canvas>
 			</div>
@@ -115,11 +133,18 @@ export default function ThreeCanvas() {
 	);
 }
 
-const Rig = ({ page }: { page: string | null }) => {
+// const Rig = ({ page }: { page: string | null }) => {
+// 	const { camera } = useThree();
+// 	const target = (Number.parseInt(page || "1") - 1) * -10;
+// 	return useFrame(() => {
+// 		camera.position.y += (target - camera.position.y) * 0.05;
+// 	});
+// };
+
+const Rig = () => {
 	const { camera } = useThree();
-	const target = (Number.parseInt(page || "1") - 1) * -10;
 	return useFrame(() => {
-		camera.position.y += (target - camera.position.y) * 0.05;
+		camera.lookAt(0, 0, 0);
 	});
 };
 

@@ -43,20 +43,18 @@ export default function MainSlider() {
 	};
 
 	const swiperProps: SwiperProps = {
-		direction: "vertical",
 		slidesPerView: 1,
 		onSlideChange: (swiper) => pageHandleChange(swiper),
 		onSwiper: (swiper) => console.log("a"),
 		initialSlide: page - 1,
-		mousewheel: {
-			forceToAxis: true,
-		},
+		mousewheel: true,
 		modules: [Pagination, Mousewheel],
 		pagination: true,
 		className: "h-[100dvh] w-[100dvw]",
 	};
 
 	const worksSwiperProps: SwiperProps = {
+		direction: "vertical",
 		slidesPerView: 1,
 		onSlideChange: (swiper) => workHandleChange(swiper),
 		initialSlide: work - 1,
@@ -74,7 +72,8 @@ export default function MainSlider() {
 					<p>1Page</p>
 				</SwiperSlide>
 				<SwiperSlide>
-					<Swiper {...worksSwiperProps}>
+					<p>2Page</p>
+					{/* <Swiper {...worksSwiperProps}>
 						<SwiperSlide>
 							<p>2Page(1)</p>
 						</SwiperSlide>
@@ -84,7 +83,7 @@ export default function MainSlider() {
 						<SwiperSlide>
 							<p>2Page(3)</p>
 						</SwiperSlide>
-					</Swiper>
+					</Swiper> */}
 				</SwiperSlide>
 				<SwiperSlide>
 					<p>3Page</p>

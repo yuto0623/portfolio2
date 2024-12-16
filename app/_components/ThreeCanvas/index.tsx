@@ -40,6 +40,7 @@ export default function ThreeCanvas() {
 								fontSize={2}
 								page={1}
 								currentPage={Number.parseInt(page || "") || 1}
+								position={[0, 0, -1.5]}
 							>
 								Portfolio
 							</TextEffect>
@@ -54,14 +55,6 @@ export default function ThreeCanvas() {
 							/>
 							<RotatingTorus />
 						</Float>
-					</group>
-					<group position={[-3, -7, 0]}>
-						<Float floatIntensity={2} castShadow>
-							<TextEffect fontSize={1}>Works</TextEffect>
-						</Float>
-						<group ref={worksRef}>
-							<WorksSlider />
-						</group>
 					</group>
 					<Rig page={page} />
 					<WorksRig work={work} worksRef={worksRef} />

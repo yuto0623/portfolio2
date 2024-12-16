@@ -7,20 +7,20 @@ import type { Mesh } from "three";
 export default function ({
 	children,
 	fontSize,
-	fillOpacity,
 	page,
 	currentPage,
+	position,
 }: {
 	children: React.ReactNode;
 	fontSize: number;
-	fillOpacity?: number;
 	page?: number;
 	currentPage?: number;
+	position: [number, number, number];
 }) {
 	const [isTheme, setIsTheme] = useState<string | undefined>("");
 	const { theme, resolvedTheme } = useTheme();
 	const textRef = useRef<Mesh>(null);
-	const [targetOpacity, setTargetOpacity] = useState<number>(fillOpacity ?? 1);
+	const [targetOpacity, setTargetOpacity] = useState<number>(0);
 
 	useEffect(() => {
 		let currentTheme: string | undefined;
@@ -54,7 +54,7 @@ export default function ({
 		<Text
 			ref={textRef}
 			color={isTheme === "dark" ? "#ffffff" : "#000000"}
-			position={[0, 0, -1.5]}
+			position={position}
 			fontSize={fontSize}
 			castShadow
 		>

@@ -151,7 +151,7 @@ const TextEffect = ({
 			position={[0, 0, -1.5]}
 			fontSize={fontSize}
 			castShadow
-			fillOpacity={fillOpacity ? fillOpacity : 1}
+			fillOpacity={fillOpacity ?? 1}
 		>
 			{children}
 		</Text>

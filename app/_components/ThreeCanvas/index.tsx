@@ -31,12 +31,13 @@ import {
 	type Mesh,
 	TextureLoader,
 } from "three";
+import { fill } from "three/src/extras/TextureUtils.js";
 import BgEffect from "./BgEffect";
+import Rig from "./Rig";
 import RotatingTorus from "./RotatingTorus";
 import Img from "./WorksImg";
 import WorksImg from "./WorksImg";
 import WorksSlider from "./WorksSlider";
-import Rig from "./Rig";
 
 export default function ThreeCanvas() {
 	const [page, setPage] = useQueryState("page");
@@ -65,7 +66,9 @@ export default function ThreeCanvas() {
 					<directionalLight color={"white"} position={[0, 5, 5]} castShadow />
 					<group>
 						<Float floatIntensity={2} castShadow>
-							<TextEffect fontSize={2}>Portfolio</TextEffect>
+							<TextEffect fontSize={2} fillOpacity={0}>
+								Portfolio
+							</TextEffect>
 							<ContactShadows
 								position-y={-2.0}
 								opacity={0.7}
@@ -127,7 +130,8 @@ const WorksRig = ({
 const TextEffect = ({
 	children,
 	fontSize,
-}: { children: React.ReactNode; fontSize: number }) => {
+	fillOpacity,
+}: { children: React.ReactNode; fontSize: number; fillOpacity?: number }) => {
 	const [isTheme, setIsTheme] = useState<string | undefined>("");
 	const { theme, resolvedTheme } = useTheme();
 
@@ -147,6 +151,7 @@ const TextEffect = ({
 			position={[0, 0, -1.5]}
 			fontSize={fontSize}
 			castShadow
+			fillOpacity={fillOpacity ? fillOpacity : 1}
 		>
 			{children}
 		</Text>

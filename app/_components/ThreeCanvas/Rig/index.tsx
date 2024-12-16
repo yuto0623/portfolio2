@@ -18,7 +18,7 @@ export default function Rig({ page }: { page: string | null }) {
 		camera.position.x = Math.cos(currentRadianRef.current) * 5;
 		camera.position.z = Math.sin(currentRadianRef.current) * 5;
 
-		console.log(camera.position);
+		// console.log(camera.position);
 		camera.lookAt(0, 0, 0);
 	});
 }

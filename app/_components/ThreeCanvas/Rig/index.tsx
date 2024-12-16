@@ -9,9 +9,10 @@ export default function Rig({ page }: { page: string | null }) {
 	return useFrame(() => {
 		// Only interpolate if page is not null
 		if (page) {
-			const targetRadian = ((Number.parseInt(page) * 2.5) / 10) * Math.PI * 2;
+			const targetRadian =
+				(((Number.parseInt(page) - 2) * 2.5) / 10) * Math.PI * 2;
 			currentRadianRef.current +=
-				(targetRadian - currentRadianRef.current) * 0.05;
+				(-targetRadian - currentRadianRef.current) * 0.05;
 		}
 
 		camera.position.x = Math.cos(currentRadianRef.current) * 5;

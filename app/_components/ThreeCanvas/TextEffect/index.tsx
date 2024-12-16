@@ -9,11 +9,13 @@ export default function ({
 	fontSize,
 	fillOpacity,
 	page,
+	currentPage,
 }: {
 	children: React.ReactNode;
 	fontSize: number;
 	fillOpacity?: number;
 	page?: number;
+	currentPage?: number;
 }) {
 	const [isTheme, setIsTheme] = useState<string | undefined>("");
 	const { theme, resolvedTheme } = useTheme();
@@ -31,8 +33,12 @@ export default function ({
 	}, [theme, resolvedTheme]);
 
 	useEffect(() => {
-		setTargetOpacity(fillOpacity ?? 1);
-	}, [fillOpacity]);
+		if (currentPage === page) {
+			setTargetOpacity(1);
+		} else {
+			setTargetOpacity(0);
+		}
+	}, [currentPage, page]);
 
 	useFrame(() => {
 		if (textRef.current) {

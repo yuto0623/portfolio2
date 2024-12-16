@@ -67,7 +67,11 @@ export default function ThreeCanvas() {
 					<directionalLight color={"white"} position={[0, 5, 5]} castShadow />
 					<group>
 						<Float floatIntensity={2} castShadow>
-							<TextEffect fontSize={2} fillOpacity={page === "1" ? 1 : 0}>
+							<TextEffect
+								fontSize={2}
+								page={1}
+								currentPage={Number.parseInt(page || "") || 1}
+							>
 								Portfolio
 							</TextEffect>
 							<ContactShadows

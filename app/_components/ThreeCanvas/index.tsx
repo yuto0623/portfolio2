@@ -15,8 +15,6 @@ import WorksSlider from "./WorksSlider";
 export default function ThreeCanvas() {
 	const [page, setPage] = useQueryState("page");
 	const [work, setWork] = useQueryState("work");
-	const { theme, resolvedTheme } = useTheme();
-	const [isTheme, setIsTheme] = useState<string | undefined>("");
 	const worksRef = useRef<Group>(null);
 
 	return (

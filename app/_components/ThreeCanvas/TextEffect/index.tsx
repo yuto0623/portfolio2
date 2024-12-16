@@ -10,12 +10,14 @@ export default function ({
 	page,
 	currentPage,
 	position,
+	rotation,
 }: {
 	children: React.ReactNode;
 	fontSize: number;
 	page?: number;
 	currentPage?: number;
 	position: [number, number, number];
+	rotation?: [number, number, number];
 }) {
 	const [isTheme, setIsTheme] = useState<string | undefined>("");
 	const { theme, resolvedTheme } = useTheme();
@@ -40,12 +42,21 @@ export default function ({
 		}
 	}, [currentPage, page]);
 
+	useEffect(() => {
+		if (textRef.current) {
+			const material = textRef.current.material;
+			if (material && "opacity" in material) {
+				material.opacity = 0;
+			}
+		}
+	}, []);
+
 	useFrame(() => {
 		if (textRef.current) {
 			const material = textRef.current.material;
 			if (material && "opacity" in material) {
 				material.opacity += (targetOpacity - material.opacity) * 0.05;
-				console.log(material.opacity);
+				// console.log(material.opacity);
 			}
 		}
 	});
@@ -56,6 +67,7 @@ export default function ({
 			color={isTheme === "dark" ? "#ffffff" : "#000000"}
 			position={position}
 			fontSize={fontSize}
+			rotation={rotation}
 			castShadow
 		>
 			{children}

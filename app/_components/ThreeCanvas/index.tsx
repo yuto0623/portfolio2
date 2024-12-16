@@ -44,6 +44,33 @@ export default function ThreeCanvas() {
 							>
 								Portfolio
 							</TextEffect>
+							<TextEffect
+								fontSize={2}
+								page={2}
+								currentPage={Number.parseInt(page || "") || 1}
+								position={[-1.5, 0, 0]}
+								rotation={[0, Math.PI / 2, 0]}
+							>
+								Works
+							</TextEffect>
+							<TextEffect
+								fontSize={2}
+								page={3}
+								currentPage={Number.parseInt(page || "") || 1}
+								position={[0, 0, 1.5]}
+								rotation={[0, Math.PI, 0]}
+							>
+								About
+							</TextEffect>
+							<TextEffect
+								fontSize={2}
+								page={4}
+								currentPage={Number.parseInt(page || "") || 1}
+								position={[1.5, 0, 0]}
+								rotation={[0, (3 * Math.PI) / 2, 0]}
+							>
+								Contact
+							</TextEffect>
 							<ContactShadows
 								position-y={-2.0}
 								opacity={0.7}

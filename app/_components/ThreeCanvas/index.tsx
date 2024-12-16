@@ -2,7 +2,6 @@
 import { ContactShadows, Float } from "@react-three/drei";
 import { Environment } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useTheme } from "next-themes";
 import { useQueryState } from "nuqs";
 import { type RefObject, use, useEffect, useRef, useState } from "react";
 import type { Group } from "three";

@@ -11,7 +11,7 @@ import {
 	TorusKnot,
 	useTexture,
 } from "@react-three/drei";
-import { Environment, Text } from "@react-three/drei";
+import { Environment, Text, type Text as TextType } from "@react-three/drei";
 import {
 	Canvas,
 	type GroupProps,
@@ -66,7 +66,7 @@ export default function ThreeCanvas() {
 					<directionalLight color={"white"} position={[0, 5, 5]} castShadow />
 					<group>
 						<Float floatIntensity={2} castShadow>
-							<TextEffect fontSize={2} fillOpacity={0}>
+							<TextEffect fontSize={2} fillOpacity={page === "1" ? 1 : 0}>
 								Portfolio
 							</TextEffect>
 							<ContactShadows
@@ -131,9 +131,17 @@ const TextEffect = ({
 	children,
 	fontSize,
 	fillOpacity,
-}: { children: React.ReactNode; fontSize: number; fillOpacity?: number }) => {
+	page,
+}: {
+	children: React.ReactNode;
+	fontSize: number;
+	fillOpacity?: number;
+	page?: number;
+}) => {
 	const [isTheme, setIsTheme] = useState<string | undefined>("");
 	const { theme, resolvedTheme } = useTheme();
+	const textRef = useRef<Mesh>(null);
+	const targetOpacity = fillOpacity ?? 1;
 
 	useEffect(() => {
 		let currentTheme: string | undefined;
@@ -145,13 +153,23 @@ const TextEffect = ({
 		setIsTheme(currentTheme);
 	}, [theme, resolvedTheme]);
 
+	useFrame(() => {
+		if (textRef.current) {
+			const material = textRef.current.material;
+			if (material && "opacity" in material) {
+				material.opacity += (targetOpacity - material.opacity) * 0.05;
+				console.log(material.opacity);
+			}
+		}
+	});
+
 	return (
 		<Text
 			color={isTheme === "dark" ? "#ffffff" : "#000000"}
 			position={[0, 0, -1.5]}
 			fontSize={fontSize}
 			castShadow
-			fillOpacity={fillOpacity ?? 1}
+			ref={textRef}
 		>
 			{children}
 		</Text>

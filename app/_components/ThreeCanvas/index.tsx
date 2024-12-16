@@ -35,6 +35,7 @@ import { fill } from "three/src/extras/TextureUtils.js";
 import BgEffect from "./BgEffect";
 import Rig from "./Rig";
 import RotatingTorus from "./RotatingTorus";
+import TextEffect from "./TextEffect";
 import Img from "./WorksImg";
 import WorksImg from "./WorksImg";
 import WorksSlider from "./WorksSlider";
@@ -126,52 +127,3 @@ const WorksRig = ({
 // 		console.log(pointer);
 // 	});
 // };
-
-const TextEffect = ({
-	children,
-	fontSize,
-	fillOpacity,
-	page,
-}: {
-	children: React.ReactNode;
-	fontSize: number;
-	fillOpacity?: number;
-	page?: number;
-}) => {
-	const [isTheme, setIsTheme] = useState<string | undefined>("");
-	const { theme, resolvedTheme } = useTheme();
-	const textRef = useRef<Mesh>(null);
-	const targetOpacity = fillOpacity ?? 1;
-
-	useEffect(() => {
-		let currentTheme: string | undefined;
-		if (resolvedTheme === "system") {
-			currentTheme = theme;
-		} else {
-			currentTheme = resolvedTheme;
-		}
-		setIsTheme(currentTheme);
-	}, [theme, resolvedTheme]);
-
-	useFrame(() => {
-		if (textRef.current) {
-			const material = textRef.current.material;
-			if (material && "opacity" in material) {
-				material.opacity += (targetOpacity - material.opacity) * 0.05;
-				console.log(material.opacity);
-			}
-		}
-	});
-
-	return (
-		<Text
-			color={isTheme === "dark" ? "#ffffff" : "#000000"}
-			position={[0, 0, -1.5]}
-			fontSize={fontSize}
-			castShadow
-			ref={textRef}
-		>
-			{children}
-		</Text>
-	);
-};

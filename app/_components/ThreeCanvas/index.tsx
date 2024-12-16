@@ -6,8 +6,8 @@ import { useQueryState } from "nuqs";
 import { type RefObject, use, useEffect, useRef, useState } from "react";
 import type { Group } from "three";
 import BgEffect from "./BgEffect";
+import MainObject from "./MainObject";
 import Rig from "./Rig";
-import RotatingTorus from "./RotatingTorus";
 import TextEffect from "./TextEffect";
 import WorksSlider from "./WorksSlider";
 
@@ -80,7 +80,7 @@ export default function ThreeCanvas() {
 								far={10}
 								resolution={256}
 							/>
-							<RotatingTorus />
+							<MainObject page={Number.parseInt(page ?? "")} />
 						</Float>
 					</group>
 					<Rig page={page} />

@@ -1,43 +1,15 @@
 "use client";
-import {
-	ContactShadows,
-	Edges,
-	Float,
-	MeshTransmissionMaterial,
-	OrbitControls,
-	PerspectiveCamera,
-	Scroll,
-	ScrollControls,
-	TorusKnot,
-	useTexture,
-} from "@react-three/drei";
-import { Environment, Text, type Text as TextType } from "@react-three/drei";
-import {
-	Canvas,
-	type GroupProps,
-	type MeshProps,
-	useFrame,
-	useLoader,
-	useThree,
-} from "@react-three/fiber";
+import { ContactShadows, Float } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useTheme } from "next-themes";
 import { useQueryState } from "nuqs";
 import { type RefObject, use, useEffect, useRef, useState } from "react";
-import {
-	CanvasTexture,
-	type Color,
-	GridHelper,
-	type Group,
-	type Mesh,
-	TextureLoader,
-} from "three";
-import { fill } from "three/src/extras/TextureUtils.js";
+import type { Group } from "three";
 import BgEffect from "./BgEffect";
 import Rig from "./Rig";
 import RotatingTorus from "./RotatingTorus";
 import TextEffect from "./TextEffect";
-import Img from "./WorksImg";
-import WorksImg from "./WorksImg";
 import WorksSlider from "./WorksSlider";
 
 export default function ThreeCanvas() {
@@ -94,18 +66,8 @@ export default function ThreeCanvas() {
 							<WorksSlider />
 						</group>
 					</group>
-					{/* <Physics>
-						<RigidBody position={[-3, 2, 0]}>
-							<TorusKnot scale={0.5}>
-								<meshStandardMaterial color="#ccc" />
-							</TorusKnot>
-						</RigidBody>
-						<CuboidCollider position={[0, -2.5, 0]} args={[10, 1, 10]} />
-					</Physics> */}
-					{/* <OrbitControls /> */}
 					<Rig page={page} />
 					<WorksRig work={work} worksRef={worksRef} />
-					{/* <FollowMouseLight /> */}
 				</Canvas>
 			</div>
 		</>
@@ -124,10 +86,3 @@ const WorksRig = ({
 			(target - worksRef.current.position.x) * 0.05;
 	});
 };
-
-// const FollowMouseLight = () => {
-// 	const { pointer } = useThree();
-// 	return useFrame(() => {
-// 		console.log(pointer);
-// 	});
-// };

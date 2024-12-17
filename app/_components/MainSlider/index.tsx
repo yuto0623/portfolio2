@@ -43,6 +43,7 @@ export default function MainSlider() {
 	};
 
 	const swiperProps: SwiperProps = {
+		direction: "vertical",
 		slidesPerView: 1,
 		onSlideChange: (swiper) => pageHandleChange(swiper),
 		onSwiper: (swiper) => console.log("a"),

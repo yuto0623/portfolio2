@@ -1,9 +1,9 @@
 import { getWindowSize } from "@/app/hooks/GetWindowSize";
 import { ContactShadows, MeshTransmissionMaterial } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
+import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
 import type { Mesh } from "three";
-import gsap from "gsap";
 
 export default function MainObject({ page }: { page: number }) {
 	const meshRefs = useRef<Mesh[]>([]);
@@ -27,6 +27,15 @@ export default function MainObject({ page }: { page: number }) {
 				mesh.material.needsUpdate = true;
 				mesh.material.transparent = true;
 			}
+
+			// //ページが切り替わるとオブジェクトが移動する
+			// if (mesh?.position) {
+			// 	if (2 === page) {
+			// 		gsap.to(mesh.position, { x: 0, y: 0, z: 3, duration: 1 });
+			// 	} else {
+			// 		gsap.to(mesh.position, { x: 0, y: 0, z: 0, duration: 1 });
+			// 	}
+			// }
 
 			if (mesh?.geometry) {
 				//ウィンドウサイズによってオブジェクトの大きさを変更

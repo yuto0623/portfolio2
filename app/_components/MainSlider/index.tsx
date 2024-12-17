@@ -89,11 +89,14 @@ export default function MainSlider() {
 				</SwiperSlide>
 				<SwiperSlide className="relative">
 					<p>2Page</p>
-					<div
-						className={`w-1/2 h-2/3 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 absolute backdrop-filter backdrop-blur-sm
+					<button
+						type="button"
+						className={`py-5 px-8 left-1/2 top-2/3 -translate-x-1/2 absolute backdrop-filter backdrop-blur-sm
 												transition-all duration-500 rounded-3xl border border-[#e4e4e48f]
 							 ${isTheme === "dark" ? "bg-[#ffffff27]" : "bg-[#00000027]"}`}
-					/>
+					>
+						Click me
+					</button>
 					{/* <Swiper {...worksSwiperProps}>
 						<SwiperSlide>
 							<p>2Page(1)</p>

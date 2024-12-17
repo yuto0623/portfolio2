@@ -27,15 +27,24 @@ export default function MainObject({ page }: { page: number }) {
 				mesh.material.transparent = true;
 			}
 
+			//ウィンドウサイズによってオブジェクトの大きさを変更
 			if (mesh?.material) {
 				if (width < 768 && mesh.geometry.type === "TorusKnotGeometry") {
-					mesh.scale.set(0.5, 0.5, 0.5);
+					mesh.scale.x += (0.5 - mesh.scale.x) * 0.05;
+					mesh.scale.y += (0.5 - mesh.scale.y) * 0.05;
+					mesh.scale.z += (0.5 - mesh.scale.z) * 0.05;
 				} else if (width < 768 && mesh.geometry.type !== "TorusKnotGeometry") {
-					mesh.scale.set(0.7, 0.7, 0.7);
+					mesh.scale.x += (0.7 - mesh.scale.x) * 0.05;
+					mesh.scale.y += (0.7 - mesh.scale.y) * 0.05;
+					mesh.scale.z += (0.7 - mesh.scale.z) * 0.05;
 				} else if (width >= 768 && mesh.geometry.type === "TorusKnotGeometry") {
-					mesh.scale.set(0.7, 0.7, 0.7);
+					mesh.scale.x += (0.7 - mesh.scale.x) * 0.05;
+					mesh.scale.y += (0.7 - mesh.scale.y) * 0.05;
+					mesh.scale.z += (0.7 - mesh.scale.z) * 0.05;
 				} else {
-					mesh.scale.set(1, 1, 1);
+					mesh.scale.x += (1 - mesh.scale.x) * 0.05;
+					mesh.scale.y += (1 - mesh.scale.y) * 0.05;
+					mesh.scale.z += (1 - mesh.scale.z) * 0.05;
 				}
 			}
 		});

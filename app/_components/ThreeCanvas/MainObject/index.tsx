@@ -1,4 +1,4 @@
-import { MeshTransmissionMaterial } from "@react-three/drei";
+import { ContactShadows, MeshTransmissionMaterial } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import type { Mesh } from "three";
@@ -52,6 +52,15 @@ export default function MainObject({ page }: { page: number }) {
 					/>
 				</mesh>
 			))}
+			<ContactShadows
+				position-y={-2.0}
+				opacity={0.7}
+				scale={7}
+				blur={2.4}
+				color={"#000"}
+				far={10}
+				resolution={256}
+			/>
 		</>
 	);
 }

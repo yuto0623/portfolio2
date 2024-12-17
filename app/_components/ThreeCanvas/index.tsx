@@ -71,15 +71,7 @@ export default function ThreeCanvas() {
 							>
 								Contact
 							</TextEffect>
-							<ContactShadows
-								position-y={-2.0}
-								opacity={0.7}
-								scale={7}
-								blur={2.4}
-								color={"#000"}
-								far={10}
-								resolution={256}
-							/>
+
 							<MainObject page={Number.parseInt(page ?? "")} />
 						</Float>
 					</group>

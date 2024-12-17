@@ -3,6 +3,7 @@ import { ContactShadows, MeshTransmissionMaterial } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import type { Mesh } from "three";
+import gsap from "gsap";
 
 export default function MainObject({ page }: { page: number }) {
 	const meshRefs = useRef<Mesh[]>([]);
@@ -14,8 +15,8 @@ export default function MainObject({ page }: { page: number }) {
 				mesh.rotateX(0.005);
 				mesh.rotateZ(0.005);
 			}
-			//ページが切り替わるとオブジェクトも切り替わる(透明度の変化)
 			if (mesh?.material && "opacity" in mesh.material) {
+				//ページが切り替わるとオブジェクトも切り替わる(透明度の変化)
 				if (index === 0 && !page) {
 					mesh.material.opacity += (1 - mesh.material.opacity) * 0.05;
 				} else if (index + 1 === page) {
@@ -27,24 +28,16 @@ export default function MainObject({ page }: { page: number }) {
 				mesh.material.transparent = true;
 			}
 
-			//ウィンドウサイズによってオブジェクトの大きさを変更
-			if (mesh?.material) {
+			if (mesh?.geometry) {
+				//ウィンドウサイズによってオブジェクトの大きさを変更
 				if (width < 768 && mesh.geometry.type === "TorusKnotGeometry") {
-					mesh.scale.x += (0.5 - mesh.scale.x) * 0.05;
-					mesh.scale.y += (0.5 - mesh.scale.y) * 0.05;
-					mesh.scale.z += (0.5 - mesh.scale.z) * 0.05;
+					gsap.to(mesh.scale, { x: 0.5, y: 0.5, z: 0.5, duration: 0.8 });
 				} else if (width < 768 && mesh.geometry.type !== "TorusKnotGeometry") {
-					mesh.scale.x += (0.7 - mesh.scale.x) * 0.05;
-					mesh.scale.y += (0.7 - mesh.scale.y) * 0.05;
-					mesh.scale.z += (0.7 - mesh.scale.z) * 0.05;
+					gsap.to(mesh.scale, { x: 0.7, y: 0.7, z: 0.7, duration: 0.8 });
 				} else if (width >= 768 && mesh.geometry.type === "TorusKnotGeometry") {
-					mesh.scale.x += (0.7 - mesh.scale.x) * 0.05;
-					mesh.scale.y += (0.7 - mesh.scale.y) * 0.05;
-					mesh.scale.z += (0.7 - mesh.scale.z) * 0.05;
+					gsap.to(mesh.scale, { x: 0.7, y: 0.7, z: 0.7, duration: 0.8 });
 				} else {
-					mesh.scale.x += (1 - mesh.scale.x) * 0.05;
-					mesh.scale.y += (1 - mesh.scale.y) * 0.05;
-					mesh.scale.z += (1 - mesh.scale.z) * 0.05;
+					gsap.to(mesh.scale, { x: 1, y: 1, z: 1, duration: 0.8 });
 				}
 			}
 		});

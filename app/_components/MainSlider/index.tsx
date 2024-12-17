@@ -52,6 +52,7 @@ export default function MainSlider() {
 		modules: [Pagination, Mousewheel],
 		pagination: true,
 		className: "h-[100dvh] w-[100dvw]",
+		speed: 1000,
 	};
 
 	const worksSwiperProps: SwiperProps = {

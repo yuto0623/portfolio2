@@ -49,6 +49,8 @@ export default function MainObject({ page }: { page: number }) {
 						backsideThickness={1}
 						thickness={0.2}
 						depthTest={false}
+						toneMapped={true}
+						opacity={0}
 					/>
 				</mesh>
 			))}

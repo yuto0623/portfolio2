@@ -31,7 +31,7 @@ export default function MainObject({ page }: { page: number }) {
 				<torusGeometry key="torus" />,
 				<icosahedronGeometry key="icosahedron" />,
 				<sphereGeometry key="sphere" />,
-				<torusKnotGeometry key="box" />,
+				<torusKnotGeometry key="torusKnot" />,
 			].map((geometry, index) => (
 				<mesh
 					key={geometry.key ?? `geometry-${index}`}
@@ -41,6 +41,7 @@ export default function MainObject({ page }: { page: number }) {
 						}
 					}}
 					castShadow
+					scale={geometry.key === "torusKnot" ? [0.7, 0.7, 0.7] : [1, 1, 1]}
 				>
 					{geometry}
 					<MeshTransmissionMaterial

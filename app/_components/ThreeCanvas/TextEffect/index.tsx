@@ -1,3 +1,5 @@
+"use client";
+import { getWindowSize } from "@/app/hooks/GetWindowSize";
 import { Text } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useTheme } from "next-themes";
@@ -6,14 +8,12 @@ import type { Mesh } from "three";
 
 export default function ({
 	children,
-	fontSize,
 	page,
 	currentPage,
 	position,
 	rotation,
 }: {
 	children: React.ReactNode;
-	fontSize: number;
 	page?: number;
 	currentPage?: number;
 	position: [number, number, number];
@@ -23,6 +23,7 @@ export default function ({
 	const { theme, resolvedTheme } = useTheme();
 	const textRef = useRef<Mesh>(null);
 	const [targetOpacity, setTargetOpacity] = useState<number>(0);
+	const { height, width } = getWindowSize();
 
 	useEffect(() => {
 		let currentTheme: string | undefined;
@@ -59,6 +60,19 @@ export default function ({
 				// console.log(material.opacity);
 			}
 		}
+		if (width < 768) {
+			if (textRef.current && "fontSize" in textRef.current) {
+				(textRef.current as unknown as { fontSize: number }).fontSize +=
+					(1 - (textRef.current as unknown as { fontSize: number }).fontSize) *
+					0.05;
+			}
+		} else if (width >= 768) {
+			if (textRef.current && "fontSize" in textRef.current) {
+				(textRef.current as unknown as { fontSize: number }).fontSize +=
+					(2 - (textRef.current as unknown as { fontSize: number }).fontSize) *
+					0.05;
+			}
+		}
 	});
 
 	return (
@@ -66,7 +80,7 @@ export default function ({
 			ref={textRef}
 			color={isTheme === "dark" ? "#ffffff" : "#000000"}
 			position={position}
-			fontSize={fontSize}
+			fontSize={2}
 			rotation={rotation}
 			castShadow
 		>

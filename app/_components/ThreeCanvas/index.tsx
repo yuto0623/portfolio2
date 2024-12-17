@@ -37,7 +37,6 @@ export default function ThreeCanvas() {
 					<group>
 						<Float floatIntensity={2} castShadow>
 							<TextEffect
-								fontSize={2}
 								page={1}
 								currentPage={Number.parseInt(page || "") || 1}
 								position={[0, 0, -1.5]}
@@ -45,7 +44,6 @@ export default function ThreeCanvas() {
 								Portfolio
 							</TextEffect>
 							<TextEffect
-								fontSize={2}
 								page={2}
 								currentPage={Number.parseInt(page || "") || 1}
 								position={[-1.5, 0, 0]}
@@ -54,7 +52,6 @@ export default function ThreeCanvas() {
 								Works
 							</TextEffect>
 							<TextEffect
-								fontSize={2}
 								page={3}
 								currentPage={Number.parseInt(page || "") || 1}
 								position={[0, 0, 1.5]}
@@ -63,7 +60,6 @@ export default function ThreeCanvas() {
 								About
 							</TextEffect>
 							<TextEffect
-								fontSize={2}
 								page={4}
 								currentPage={Number.parseInt(page || "") || 1}
 								position={[1.5, 0, 0]}

@@ -5,7 +5,7 @@ import { Swiper, type SwiperProps, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
 import { useTheme } from "next-themes";
 import { parseAsInteger, useQueryState } from "nuqs";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { HiOutlineArrowLongDown } from "react-icons/hi2";
 import { Mousewheel, Pagination } from "swiper/modules";
 import CustomPagination from "./CustomPagination";
@@ -31,6 +31,18 @@ export default function MainSlider() {
 			clearOnDefault: false,
 		}),
 	);
+
+	const [isTheme, setIsTheme] = useState<string | undefined>("");
+	const { theme, resolvedTheme } = useTheme();
+	useEffect(() => {
+		let currentTheme: string | undefined;
+		if (resolvedTheme === "system") {
+			currentTheme = theme;
+		} else {
+			currentTheme = resolvedTheme;
+		}
+		setIsTheme(currentTheme);
+	}, [theme, resolvedTheme]);
 
 	// console.log(page);
 
@@ -77,7 +89,11 @@ export default function MainSlider() {
 				</SwiperSlide>
 				<SwiperSlide className="relative">
 					<p>2Page</p>
-					<div className="w-1/2 h-2/3 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 absolute backdrop-filter backdrop-blur-sm bg-[#ffffff1c]" />
+					<div
+						className={`w-1/2 h-2/3 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 absolute backdrop-filter backdrop-blur-sm
+												transition-all duration-500 rounded-3xl border border-[#e4e4e48f]
+							 ${isTheme === "dark" ? "bg-[#ffffff27]" : "bg-[#00000027]"}`}
+					/>
 					{/* <Swiper {...worksSwiperProps}>
 						<SwiperSlide>
 							<p>2Page(1)</p>

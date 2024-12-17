@@ -75,8 +75,9 @@ export default function MainSlider() {
 				<SwiperSlide className="relative">
 					<Scroll page={page} />
 				</SwiperSlide>
-				<SwiperSlide>
+				<SwiperSlide className="relative">
 					<p>2Page</p>
+					<div className="w-1/2 h-2/3 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 absolute backdrop-filter backdrop-blur-sm bg-[#ffffff1c]" />
 					{/* <Swiper {...worksSwiperProps}>
 						<SwiperSlide>
 							<p>2Page(1)</p>

@@ -14,7 +14,9 @@ export default function MainObject({ page }: { page: number }) {
 			}
 
 			if (mesh?.material && "opacity" in mesh.material) {
-				if (index + 1 === page) {
+				if (index === 0 && !page) {
+					mesh.material.opacity += (1 - mesh.material.opacity) * 0.05;
+				} else if (index + 1 === page) {
 					mesh.material.opacity += (1 - mesh.material.opacity) * 0.05;
 				} else {
 					mesh.material.opacity += (0 - mesh.material.opacity) * 0.05;

@@ -72,7 +72,6 @@ export default function MainSlider() {
 		<>
 			<Swiper {...swiperProps}>
 				<SwiperSlide className="relative">
-					<p>1Page</p>
 					<div
 						className={`absolute left-5 bottom-1/2 translate-y-1/2 [writing-mode:vertical-rl] text-xl
 							transition-all 

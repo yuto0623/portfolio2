@@ -6,12 +6,9 @@ import {
 	Text,
 	useScroll,
 } from "@react-three/drei";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { is } from "@react-three/fiber/dist/declarations/src/core/utils";
-import { gsap } from "gsap";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { useQueryState } from "nuqs";
-import { use, useEffect, useRef, useState } from "react";
-import BgEffect from "../../ThreeCanvas/BgEffect";
+import { useEffect, useRef } from "react";
 
 export default function WorksPage({
 	isTheme,
@@ -26,7 +23,6 @@ export default function WorksPage({
 	setIsAllowSlideNext: React.Dispatch<React.SetStateAction<boolean>>;
 	setIsAllowSlidePrev: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-	const overlayRef = useRef<HTMLDivElement>(null);
 	const [page, setPage] = useQueryState("page");
 
 	useEffect(() => {
@@ -37,18 +33,9 @@ export default function WorksPage({
 		}
 	});
 
-	// useEffect(() => {
-	// 	if (page === "2") {
-	// 		gsap.to(overlayRef.current, { opacity: 1, duration: 1 });
-	// 	} else {
-	// 		gsap.to(overlayRef.current, { opacity: 0, duration: 1 });
-	// 	}
-	// }, [page]);
-
 	return (
 		<>
 			<div
-				ref={overlayRef}
 				className={`h-[70%] w-full left-0 top-full -translate-y-full absolute
               transition-all duration-500 md:left-1/2 md:top-1/2 md:h-full md:w-[50%] md:-translate-y-1/2
               `}

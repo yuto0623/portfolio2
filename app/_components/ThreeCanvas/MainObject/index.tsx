@@ -71,7 +71,6 @@ export default function MainObject({ page }: { page: number }) {
 							meshRefs.current[index] = el;
 						}
 					}}
-					castShadow
 					scale={geometry.key === "torusKnot" ? [0.7, 0.7, 0.7] : [1, 1, 1]}
 				>
 					{geometry}
@@ -87,7 +86,7 @@ export default function MainObject({ page }: { page: number }) {
 			<ContactShadows
 				position-y={-2.0}
 				opacity={0.7}
-				scale={7}
+				scale={20}
 				blur={2.4}
 				color={"#000"}
 				far={10}

@@ -26,15 +26,10 @@ export default function ThreeCanvas() {
 					<BgEffect />
 					<Environment preset="studio" />
 					<ambientLight intensity={0.1} />
-					<spotLight
-						position={[20, 20, 10]}
-						penumbra={1}
-						castShadow
-						angle={0.2}
-					/>
-					<directionalLight color={"white"} position={[0, 5, 5]} castShadow />
+					<spotLight position={[20, 20, 10]} penumbra={1} angle={0.2} />
+					<directionalLight color={"white"} position={[0, 5, 5]} />
 					<group>
-						<Float floatIntensity={2} castShadow>
+						<Float floatIntensity={2}>
 							<TextEffect
 								page={1}
 								currentPage={Number.parseInt(page || "") || 1}

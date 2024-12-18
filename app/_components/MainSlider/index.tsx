@@ -62,43 +62,34 @@ export default function MainSlider() {
 	};
 
 	useEffect(() => {
-		if (stopScroll) {
-			swiperRef.current?.mousewheel.disable();
-			console.log("スクロール無効");
-		} else {
-			swiperRef.current?.mousewheel.enable();
-			console.log("スクロール有効");
-		}
-		if (swiperRef.current) {
-			if (isAllowSlideNext) {
-				swiperRef.current.allowSlideNext = true;
-				console.log("nextスクロール有効");
-			} else if (!isAllowSlideNext) {
-				swiperRef.current.allowSlideNext = false;
-				console.log("nextスクロール無効");
+		const swiper = swiperRef.current;
+		if (swiper) {
+			if (stopScroll) {
+				swiper.mousewheel.disable();
+				// console.log("スクロール無効");
+			} else {
+				swiper.mousewheel.enable();
+				// console.log("スクロール有効");
 			}
-			if (isAllowSlidePrev) {
-				swiperRef.current.allowSlidePrev = true;
-				console.log("prevスクロール有効");
-			} else if (!isAllowSlidePrev) {
-				swiperRef.current.allowSlidePrev = false;
-				console.log("prevスクロール無効");
-			}
-		}
-		if (page !== 2) {
-			console.log("worksページ以外");
-			if (swiperRef.current) {
-				swiperRef.current.allowSlideNext = true;
-				console.log("nextスクロール有効");
-				swiperRef.current.allowSlidePrev = true;
-				console.log("prevスクロール有効");
-			}
-		}
-	});
 
-	useEffect(() => {
-		console.log(isAllowSlideNext, isAllowSlidePrev);
-	}, [isAllowSlideNext, isAllowSlidePrev]);
+			if (page !== 2) {
+				// console.log("worksページ以外");
+				swiper.allowSlideNext = true;
+				swiper.allowSlidePrev = true;
+				// console.log("nextスクロール有効");
+				// console.log("prevスクロール有効");
+			} else {
+				swiper.allowSlideNext = isAllowSlideNext;
+				swiper.allowSlidePrev = isAllowSlidePrev;
+				// console.log(
+				// 	isAllowSlideNext ? "nextスクロール有効" : "nextスクロール無効",
+				// );
+				// console.log(
+				// 	isAllowSlidePrev ? "prevスクロール有効" : "prevスクロール無効",
+				// );
+			}
+		}
+	}, [stopScroll, isAllowSlideNext, isAllowSlidePrev, page]);
 
 	return (
 		<>

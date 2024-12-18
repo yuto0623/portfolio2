@@ -117,7 +117,8 @@ function ScrollCheck({
 		const currentOffset = data.offset;
 		const delta = Math.abs(currentOffset - prevOffset.current);
 
-		const edgeThreshold = 0.0001;
+		const edgeThreshold = 0.01;
+		// console.log(currentOffset);
 
 		if (isTouchDevice) {
 			setIsAllowSlidePrev(true);
@@ -126,17 +127,12 @@ function ScrollCheck({
 			return;
 		}
 
-		if (delta < 0.0001) {
-			if (currentOffset <= edgeThreshold) {
-				setIsAllowSlidePrev(true); // 前へのスライドを無効化
-				setIsAllowSlideNext(false);
-			} else if (currentOffset >= 1 - edgeThreshold) {
-				setIsAllowSlidePrev(false);
-				setIsAllowSlideNext(true); // 次へのスライドを無効化
-			} else {
-				setIsAllowSlidePrev(true);
-				setIsAllowSlideNext(true);
-			}
+		if (currentOffset <= edgeThreshold) {
+			setIsAllowSlidePrev(true); // 前へのスライドを無効化
+			setIsAllowSlideNext(false);
+		} else if (currentOffset >= 1 - edgeThreshold) {
+			setIsAllowSlidePrev(false);
+			setIsAllowSlideNext(true); // 次へのスライドを無効化
 		} else {
 			setIsAllowSlidePrev(true);
 			setIsAllowSlideNext(true);

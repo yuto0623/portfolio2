@@ -88,6 +88,7 @@ export default function MainObject({ page }: { page: number }) {
 						thickness={0.2}
 						depthTest={false}
 						opacity={0}
+						samples={1}
 					/>
 				</mesh>
 			))}
@@ -95,10 +96,10 @@ export default function MainObject({ page }: { page: number }) {
 				position-y={-2.0}
 				opacity={0.7}
 				scale={20}
-				blur={2.4}
+				blur={3.5}
 				color={"#000"}
 				far={10}
-				resolution={256}
+				resolution={64}
 			/>
 		</>
 	);

@@ -23,6 +23,7 @@ export default function ThreeCanvas() {
 					gl={{ antialias: true }}
 					shadows
 					camera={{ position: [0, 0, 5] }}
+					dpr={[1, 1.5]}
 				>
 					<Perf />
 					<BgEffect />

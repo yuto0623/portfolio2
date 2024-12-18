@@ -84,7 +84,16 @@ export default function ({
 		//ページが切り替わるとTextが移動する
 		if (textRef.current?.position) {
 			if (2 === page) {
-				gsap.to(textRef.current.position, { x: 0, y: 0, z: 3, duration: 1 });
+				if (width < 768) {
+					gsap.to(textRef.current.position, {
+						x: 0,
+						y: 2.5,
+						z: 0,
+						duration: 1,
+					});
+				} else {
+					gsap.to(textRef.current.position, { x: 0, y: 0, z: 3, duration: 1 });
+				}
 			} else {
 				gsap.to(textRef.current.position, {
 					x: position[0],

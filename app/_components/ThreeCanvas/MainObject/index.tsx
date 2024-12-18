@@ -31,7 +31,11 @@ export default function MainObject({ page }: { page: number }) {
 			//ページが切り替わるとオブジェクトが移動する
 			if (mesh?.position) {
 				if (2 === page) {
-					gsap.to(mesh.position, { x: 0, y: 0, z: 3, duration: 1 });
+					if (width < 768) {
+						gsap.to(mesh.position, { x: 0, y: 2.5, z: 0, duration: 1 });
+					} else {
+						gsap.to(mesh.position, { x: 0, y: 0, z: 3, duration: 1 });
+					}
 				} else {
 					gsap.to(mesh.position, { x: 0, y: 0, z: 0, duration: 1 });
 				}

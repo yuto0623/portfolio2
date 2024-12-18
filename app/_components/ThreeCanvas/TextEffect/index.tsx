@@ -86,14 +86,14 @@ export default function ({
 			if (2 === page) {
 				if (width < 768) {
 					gsap.to(textRef.current.position, {
-						x: 0,
+						x: -1.5,
 						y: 2.5,
 						z: 0,
 						duration: 1,
 					});
 				} else {
 					gsap.to(textRef.current.position, {
-						x: 0,
+						x: -1.5,
 						y: 0,
 						z: width * 0.002,
 						duration: 1,

@@ -66,6 +66,30 @@ export default function WorksPage({
 							>
 								test
 							</Text>
+							<Text
+								color={isTheme === "dark" ? "#ffffff" : "#000000"}
+								position={[2, 0, 0]}
+								fontSize={1}
+								castShadow
+							>
+								test
+							</Text>
+							<Text
+								color={isTheme === "dark" ? "#ffffff" : "#000000"}
+								position={[4, 0, 0]}
+								fontSize={1}
+								castShadow
+							>
+								test
+							</Text>
+							<Text
+								color={isTheme === "dark" ? "#ffffff" : "#000000"}
+								position={[6, 0, 0]}
+								fontSize={1}
+								castShadow
+							>
+								test
+							</Text>
 						</Scroll>
 					</ScrollControls>
 				</Canvas>

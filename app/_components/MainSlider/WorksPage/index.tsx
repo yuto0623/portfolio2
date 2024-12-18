@@ -15,10 +15,14 @@ export default function WorksPage({
 	isTheme,
 	stopScroll,
 	setStopScroll,
+	setIsAllowSlideNext,
+	setIsAllowSlidePrev,
 }: {
 	isTheme: string;
 	stopScroll: boolean;
 	setStopScroll: React.Dispatch<React.SetStateAction<boolean>>;
+	setIsAllowSlideNext: React.Dispatch<React.SetStateAction<boolean>>;
+	setIsAllowSlidePrev: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
 	const overlayRef = useRef<HTMLDivElement>(null);
 	const [page, setPage] = useQueryState("page");
@@ -62,6 +66,8 @@ export default function WorksPage({
 							<ScrollCheck
 								stopScroll={stopScroll}
 								setStopScroll={setStopScroll}
+								setIsAllowSlideNext={setIsAllowSlideNext}
+								setIsAllowSlidePrev={setIsAllowSlidePrev}
 							/>
 							<Text
 								color={isTheme === "dark" ? "#ffffff" : "#000000"}
@@ -82,18 +88,51 @@ export default function WorksPage({
 function ScrollCheck({
 	stopScroll,
 	setStopScroll,
+	setIsAllowSlideNext,
+	setIsAllowSlidePrev,
 }: {
 	stopScroll: boolean;
 	setStopScroll: React.Dispatch<React.SetStateAction<boolean>>;
+	setIsAllowSlideNext: React.Dispatch<React.SetStateAction<boolean>>;
+	setIsAllowSlidePrev: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
 	const data = useScroll();
+	const prevOffset = useRef(0);
+
 	useFrame(() => {
-		const range = data.range(0, 0.99);
-		if (range !== 1 && range !== 0) {
-			setStopScroll(true);
+		const currentOffset = data.offset;
+		const delta = Math.abs(currentOffset - prevOffset.current);
+
+		const edgeThreshold = 0.0001;
+
+		if (delta < 0.0001) {
+			if (currentOffset <= edgeThreshold) {
+				setIsAllowSlidePrev(true); // 前へのスライドを無効化
+				setIsAllowSlideNext(false);
+			} else if (currentOffset >= 1 - edgeThreshold) {
+				setIsAllowSlidePrev(false);
+				setIsAllowSlideNext(true); // 次へのスライドを無効化
+			} else {
+				setIsAllowSlidePrev(true);
+				setIsAllowSlideNext(true);
+			}
 		} else {
-			setStopScroll(false);
+			setIsAllowSlidePrev(true);
+			setIsAllowSlideNext(true);
 		}
+
+		// スクロールが停止していて、かつ端にいる場合
+		if (
+			delta < 0.0001 &&
+			(currentOffset <= edgeThreshold || currentOffset >= 1 - edgeThreshold)
+		) {
+			setStopScroll(false);
+		} else {
+			setStopScroll(true);
+		}
+
+		prevOffset.current = currentOffset;
 	});
-	return <mesh />;
+
+	return null;
 }

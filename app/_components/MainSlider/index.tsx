@@ -14,7 +14,11 @@ import WorksPage from "./WorksPage";
 
 export default function MainSlider() {
 	const [stopScroll, setStopScroll] = useState(false);
-
+	const [isTheme, setIsTheme] = useState<string | undefined>("");
+	const [isAllowSlideNext, setIsAllowSlideNext] = useState(false);
+	const [isAllowSlidePrev, setIsAllowSlidePrev] = useState(false);
+	const swiperRef = useRef<SwiperCore>();
+	const { theme, resolvedTheme } = useTheme();
 	const [page, setPage] = useQueryState(
 		"page",
 		parseAsInteger.withDefault(1).withOptions({
@@ -25,8 +29,6 @@ export default function MainSlider() {
 		}),
 	);
 
-	const [isTheme, setIsTheme] = useState<string | undefined>("");
-	const { theme, resolvedTheme } = useTheme();
 	useEffect(() => {
 		let currentTheme: string | undefined;
 		if (resolvedTheme === "system") {
@@ -37,14 +39,10 @@ export default function MainSlider() {
 		setIsTheme(currentTheme);
 	}, [theme, resolvedTheme]);
 
-	// console.log(page);
-
 	const pageHandleChange = (swiper: SwiperType) => {
-		// console.log(swiper.activeIndex);
 		setPage(swiper.activeIndex + 1);
 	};
 
-	const swiperRef = useRef<SwiperCore>();
 	const onInit = (Swiper: SwiperCore): void => {
 		swiperRef.current = Swiper;
 	};
@@ -59,17 +57,48 @@ export default function MainSlider() {
 		pagination: true,
 		className: "h-[100dvh] w-[100dvw]",
 		speed: 1000,
-		mousewheel: true,
+		mousewheel: { forceToAxis: true },
 		onInit: onInit,
 	};
 
 	useEffect(() => {
 		if (stopScroll) {
 			swiperRef.current?.mousewheel.disable();
+			console.log("スクロール無効");
 		} else {
 			swiperRef.current?.mousewheel.enable();
+			console.log("スクロール有効");
+		}
+		if (swiperRef.current) {
+			if (isAllowSlideNext) {
+				swiperRef.current.allowSlideNext = true;
+				console.log("nextスクロール有効");
+			} else if (!isAllowSlideNext) {
+				swiperRef.current.allowSlideNext = false;
+				console.log("nextスクロール無効");
+			}
+			if (isAllowSlidePrev) {
+				swiperRef.current.allowSlidePrev = true;
+				console.log("prevスクロール有効");
+			} else if (!isAllowSlidePrev) {
+				swiperRef.current.allowSlidePrev = false;
+				console.log("prevスクロール無効");
+			}
+		}
+		if (page !== 2) {
+			console.log("worksページ以外");
+			if (swiperRef.current) {
+				swiperRef.current.allowSlideNext = true;
+				console.log("nextスクロール有効");
+				swiperRef.current.allowSlidePrev = true;
+				console.log("prevスクロール有効");
+			}
 		}
 	});
+
+	useEffect(() => {
+		console.log(isAllowSlideNext, isAllowSlidePrev);
+	}, [isAllowSlideNext, isAllowSlidePrev]);
 
 	return (
 		<>
@@ -82,6 +111,8 @@ export default function MainSlider() {
 						isTheme={isTheme || ""}
 						stopScroll={stopScroll}
 						setStopScroll={setStopScroll}
+						setIsAllowSlideNext={setIsAllowSlideNext}
+						setIsAllowSlidePrev={setIsAllowSlidePrev}
 					/>
 				</SwiperSlide>
 				<SwiperSlide>

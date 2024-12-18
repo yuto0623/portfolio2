@@ -76,17 +76,17 @@ export default function MainSlider() {
 				// console.log("worksページ以外");
 				swiper.allowSlideNext = true;
 				swiper.allowSlidePrev = true;
-				console.log("nextスクロール有効");
-				console.log("prevスクロール有効");
+				// console.log("nextスクロール有効");
+				// console.log("prevスクロール有効");
 			} else {
 				swiper.allowSlideNext = isAllowSlideNext;
 				swiper.allowSlidePrev = isAllowSlidePrev;
-				console.log(
-					isAllowSlideNext ? "nextスクロール有効" : "nextスクロール無効",
-				);
-				console.log(
-					isAllowSlidePrev ? "prevスクロール有効" : "prevスクロール無効",
-				);
+				// console.log(
+				// 	isAllowSlideNext ? "nextスクロール有効" : "nextスクロール無効",
+				// );
+				// console.log(
+				// 	isAllowSlidePrev ? "prevスクロール有効" : "prevスクロール無効",
+				// );
 			}
 		}
 	}, [stopScroll, isAllowSlideNext, isAllowSlidePrev, page]);

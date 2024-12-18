@@ -1,11 +1,12 @@
 "use client";
 import Image from "next/image";
+import type SwiperCore from "swiper";
 import type { Swiper as SwiperType } from "swiper";
 import { Swiper, type SwiperProps, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
 import { useTheme } from "next-themes";
 import { parseAsInteger, useQueryState } from "nuqs";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Mousewheel, Pagination } from "swiper/modules";
 import CustomPagination from "./CustomPagination";
 import Scroll from "./Scroll";
@@ -43,18 +44,32 @@ export default function MainSlider() {
 		setPage(swiper.activeIndex + 1);
 	};
 
+	const swiperRef = useRef<SwiperCore>();
+	const onInit = (Swiper: SwiperCore): void => {
+		swiperRef.current = Swiper;
+	};
+
 	const swiperProps: SwiperProps = {
 		direction: "vertical",
 		slidesPerView: 1,
 		onSlideChange: (swiper) => pageHandleChange(swiper),
-		onSwiper: (swiper) => console.log(swiper),
+		// onSwiper: (swiper) => console.log(swiper),
 		initialSlide: page - 1,
 		modules: [Pagination, Mousewheel],
 		pagination: true,
 		className: "h-[100dvh] w-[100dvw]",
 		speed: 1000,
 		mousewheel: true,
+		onInit: onInit,
 	};
+
+	useEffect(() => {
+		if (stopScroll) {
+			swiperRef.current?.mousewheel.disable();
+		} else {
+			swiperRef.current?.mousewheel.enable();
+		}
+	});
 
 	return (
 		<>

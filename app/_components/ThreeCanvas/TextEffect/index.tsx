@@ -67,13 +67,13 @@ export default function ({
 				// console.log(material.opacity);
 			}
 		}
-		if (width < 768) {
+		if (width < 1024) {
 			if (textRef.current && "fontSize" in textRef.current) {
 				(textRef.current as unknown as { fontSize: number }).fontSize +=
 					(1 - (textRef.current as unknown as { fontSize: number }).fontSize) *
 					0.05;
 			}
-		} else if (width >= 768) {
+		} else if (width >= 1024) {
 			if (textRef.current && "fontSize" in textRef.current) {
 				(textRef.current as unknown as { fontSize: number }).fontSize +=
 					(2 - (textRef.current as unknown as { fontSize: number }).fontSize) *

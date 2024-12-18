@@ -43,11 +43,14 @@ export default function MainObject({ page }: { page: number }) {
 
 			if (mesh?.geometry) {
 				//ウィンドウサイズによってオブジェクトの大きさを変更
-				if (width < 768 && mesh.geometry.type === "TorusKnotGeometry") {
+				if (width < 1024 && mesh.geometry.type === "TorusKnotGeometry") {
 					gsap.to(mesh.scale, { x: 0.5, y: 0.5, z: 0.5, duration: 0.8 });
-				} else if (width < 768 && mesh.geometry.type !== "TorusKnotGeometry") {
+				} else if (width < 1024 && mesh.geometry.type !== "TorusKnotGeometry") {
 					gsap.to(mesh.scale, { x: 0.7, y: 0.7, z: 0.7, duration: 0.8 });
-				} else if (width >= 768 && mesh.geometry.type === "TorusKnotGeometry") {
+				} else if (
+					width >= 1024 &&
+					mesh.geometry.type === "TorusKnotGeometry"
+				) {
 					gsap.to(mesh.scale, { x: 0.7, y: 0.7, z: 0.7, duration: 0.8 });
 				} else {
 					gsap.to(mesh.scale, { x: 1, y: 1, z: 1, duration: 0.8 });

@@ -1,13 +1,35 @@
-import { Environment, Scroll, ScrollControls, Text } from "@react-three/drei";
+import {
+	Environment,
+	Scroll,
+	ScrollControls,
+	Text,
+	useScroll,
+} from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { gsap } from "gsap";
 import { useQueryState } from "nuqs";
-import { use, useEffect, useRef } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import BgEffect from "../../ThreeCanvas/BgEffect";
 
-export default function WorksPage({ isTheme }: { isTheme: string }) {
+export default function WorksPage({
+	isTheme,
+	stopScroll,
+	setStopScroll,
+}: {
+	isTheme: string;
+	stopScroll: boolean;
+	setStopScroll: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
 	const overlayRef = useRef<HTMLDivElement>(null);
 	const [page, setPage] = useQueryState("page");
+
+	useEffect(() => {
+		if (stopScroll) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "visible";
+		}
+	});
 
 	// useEffect(() => {
 	// 	if (page === "2") {
@@ -19,18 +41,17 @@ export default function WorksPage({ isTheme }: { isTheme: string }) {
 
 	return (
 		<>
-			<p>2Page</p>
 			<div
 				ref={overlayRef}
-				className={`h-[500px] w-[35%] left-1/2 top-1/2 -translate-y-1/2 absolute backdrop-filter backdrop-blur-sm
-              transition-all duration-500 rounded-3xl border border-[#e4e4e48f]
-              ${isTheme === "dark" ? "bg-[#ffffff27]" : "bg-[#00000027]"}`}
+				className={`h-full w-[50%] left-1/2 top-1/2 -translate-y-1/2 absolute
+              transition-all duration-500
+              `}
 			>
-				Click me
 				<Canvas
 					gl={{ antialias: true }}
 					shadows
 					camera={{ position: [0, 0, 5] }}
+					className="[mask-image:linear-gradient(to_left,rgba(255,255,255,1)75%,rgba(255,255,255,0))]"
 				>
 					<Environment preset="studio" />
 					<ambientLight intensity={0.1} />
@@ -38,10 +59,14 @@ export default function WorksPage({ isTheme }: { isTheme: string }) {
 					<directionalLight color={"white"} position={[0, 5, 5]} />
 					<ScrollControls pages={3} damping={0.1} horizontal>
 						<Scroll>
+							<ScrollCheck
+								stopScroll={stopScroll}
+								setStopScroll={setStopScroll}
+							/>
 							<Text
 								color={isTheme === "dark" ? "#ffffff" : "#000000"}
 								position={[0, 0, 0]}
-								fontSize={2}
+								fontSize={1}
 								castShadow
 							>
 								test
@@ -52,4 +77,23 @@ export default function WorksPage({ isTheme }: { isTheme: string }) {
 			</div>
 		</>
 	);
+}
+
+function ScrollCheck({
+	stopScroll,
+	setStopScroll,
+}: {
+	stopScroll: boolean;
+	setStopScroll: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+	const data = useScroll();
+	useFrame(() => {
+		const range = data.range(0, 0.99);
+		if (range !== 1 && range !== 0) {
+			setStopScroll(true);
+		} else {
+			setStopScroll(false);
+		}
+	});
+	return <mesh />;
 }

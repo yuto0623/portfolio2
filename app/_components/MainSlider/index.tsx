@@ -6,25 +6,16 @@ import "swiper/css";
 import { useTheme } from "next-themes";
 import { parseAsInteger, useQueryState } from "nuqs";
 import { useEffect, useState } from "react";
-import { HiOutlineArrowLongDown } from "react-icons/hi2";
 import { Mousewheel, Pagination } from "swiper/modules";
 import CustomPagination from "./CustomPagination";
 import Scroll from "./Scroll";
 import WorksPage from "./WorksPage";
 
 export default function MainSlider() {
+	const [stopScroll, setStopScroll] = useState(false);
+
 	const [page, setPage] = useQueryState(
 		"page",
-		parseAsInteger.withDefault(1).withOptions({
-			history: "push",
-			scroll: false,
-			shallow: false,
-			clearOnDefault: false,
-		}),
-	);
-
-	const [work, setWork] = useQueryState(
-		"work",
 		parseAsInteger.withDefault(1).withOptions({
 			history: "push",
 			scroll: false,
@@ -52,22 +43,17 @@ export default function MainSlider() {
 		setPage(swiper.activeIndex + 1);
 	};
 
-	const workHandleChange = (swiper: SwiperType) => {
-		// console.log(swiper.activeIndex);
-		setWork(swiper.activeIndex + 1);
-	};
-
 	const swiperProps: SwiperProps = {
 		direction: "vertical",
 		slidesPerView: 1,
 		onSlideChange: (swiper) => pageHandleChange(swiper),
-		onSwiper: (swiper) => console.log("a"),
+		onSwiper: (swiper) => console.log(swiper),
 		initialSlide: page - 1,
-		mousewheel: { forceToAxis: true },
 		modules: [Pagination, Mousewheel],
 		pagination: true,
 		className: "h-[100dvh] w-[100dvw]",
 		speed: 1000,
+		mousewheel: true,
 	};
 
 	return (
@@ -77,18 +63,11 @@ export default function MainSlider() {
 					<Scroll page={page} />
 				</SwiperSlide>
 				<SwiperSlide className="relative">
-					<WorksPage isTheme={isTheme || ""} />
-					{/* <Swiper {...worksSwiperProps}>
-						<SwiperSlide>
-							<p>2Page(1)</p>
-						</SwiperSlide>
-						<SwiperSlide>
-							<p>2Page(2)</p>
-						</SwiperSlide>
-						<SwiperSlide>
-							<p>2Page(3)</p>
-						</SwiperSlide>
-					</Swiper> */}
+					<WorksPage
+						isTheme={isTheme || ""}
+						stopScroll={stopScroll}
+						setStopScroll={setStopScroll}
+					/>
 				</SwiperSlide>
 				<SwiperSlide>
 					<p>3Page</p>

@@ -49,8 +49,8 @@ export default function WorksPage({
 		<>
 			<div
 				ref={overlayRef}
-				className={`h-full w-[50%] left-1/2 top-1/2 -translate-y-1/2 absolute
-              transition-all duration-500
+				className={`h-[70%] w-full left-0 top-full -translate-y-full absolute
+              transition-all duration-500 md:left-1/2 md:top-1/2 md:h-full md:w-[50%] md:-translate-y-1/2
               `}
 			>
 				<Canvas

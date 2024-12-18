@@ -3,6 +3,7 @@ import { ContactShadows, Float } from "@react-three/drei";
 import { Environment } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useQueryState } from "nuqs";
+import { Perf } from "r3f-perf";
 import { type RefObject, use, useEffect, useRef, useState } from "react";
 import type { Group } from "three";
 import BgEffect from "./BgEffect";
@@ -23,6 +24,7 @@ export default function ThreeCanvas() {
 					shadows
 					camera={{ position: [0, 0, 5] }}
 				>
+					<Perf />
 					<BgEffect />
 					<Environment preset="studio" />
 					<ambientLight intensity={0.1} />

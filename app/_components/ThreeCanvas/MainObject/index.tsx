@@ -34,7 +34,12 @@ export default function MainObject({ page }: { page: number }) {
 					if (width < 768) {
 						gsap.to(mesh.position, { x: 0, y: 2.5, z: 0, duration: 1 });
 					} else {
-						gsap.to(mesh.position, { x: 0, y: 0, z: 3, duration: 1 });
+						gsap.to(mesh.position, {
+							x: 0,
+							y: 0,
+							z: width * 0.002,
+							duration: 1,
+						});
 					}
 				} else {
 					gsap.to(mesh.position, { x: 0, y: 0, z: 0, duration: 1 });

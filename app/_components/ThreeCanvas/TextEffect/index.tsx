@@ -92,7 +92,12 @@ export default function ({
 						duration: 1,
 					});
 				} else {
-					gsap.to(textRef.current.position, { x: 0, y: 0, z: 3, duration: 1 });
+					gsap.to(textRef.current.position, {
+						x: 0,
+						y: 0,
+						z: width * 0.002,
+						duration: 1,
+					});
 				}
 			} else {
 				gsap.to(textRef.current.position, {

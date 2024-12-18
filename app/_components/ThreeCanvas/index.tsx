@@ -9,7 +9,6 @@ import BgEffect from "./BgEffect";
 import MainObject from "./MainObject";
 import Rig from "./Rig";
 import TextEffect from "./TextEffect";
-import WorksSlider from "./WorksSlider";
 
 export default function ThreeCanvas() {
 	const [page, setPage] = useQueryState("page");
@@ -67,7 +66,6 @@ export default function ThreeCanvas() {
 							>
 								Contact
 							</TextEffect>
-
 							<MainObject page={Number.parseInt(page ?? "")} />
 						</Float>
 					</group>

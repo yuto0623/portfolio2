@@ -2,6 +2,7 @@
 import { getWindowSize } from "@/app/hooks/GetWindowSize";
 import { Text } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
+import gsap from "gsap";
 import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
 import type { Mesh } from "three";
@@ -35,6 +36,7 @@ export default function ({
 		setIsTheme(currentTheme);
 	}, [theme, resolvedTheme]);
 
+	//該当のページのみ透明度を1にする
 	useEffect(() => {
 		if (currentPage === page) {
 			setTargetOpacity(1);
@@ -44,15 +46,20 @@ export default function ({
 	}, [currentPage, page]);
 
 	useEffect(() => {
+		//初期状態を透明にする
 		if (textRef.current) {
 			const material = textRef.current.material;
 			if (material && "opacity" in material) {
 				material.opacity = 0;
 			}
+			if (material && "depthTest" in material) {
+				material.depthTest = false;
+			}
 		}
 	}, []);
 
 	useFrame(() => {
+		//レスポンシブ対応
 		if (textRef.current) {
 			const material = textRef.current.material;
 			if (material && "opacity" in material) {
@@ -71,6 +78,20 @@ export default function ({
 				(textRef.current as unknown as { fontSize: number }).fontSize +=
 					(2 - (textRef.current as unknown as { fontSize: number }).fontSize) *
 					0.05;
+			}
+		}
+
+		//ページが切り替わるとTextが移動する
+		if (textRef.current?.position) {
+			if (2 === page) {
+				gsap.to(textRef.current.position, { x: 0, y: 0, z: 3, duration: 1 });
+			} else {
+				gsap.to(textRef.current.position, {
+					x: position[0],
+					y: position[1],
+					z: position[2],
+					duration: 1,
+				});
 			}
 		}
 	});

@@ -18,24 +18,24 @@ export default function MainObject({ page }: { page: number }) {
 			if (mesh?.material && "opacity" in mesh.material) {
 				//ページが切り替わるとオブジェクトも切り替わる(透明度の変化)
 				if (index === 0 && !page) {
-					mesh.material.opacity += (1 - mesh.material.opacity) * 0.05;
+					gsap.to(mesh.material, { opacity: 1, duration: 1 });
 				} else if (index + 1 === page) {
-					mesh.material.opacity += (1 - mesh.material.opacity) * 0.05;
+					gsap.to(mesh.material, { opacity: 1, duration: 1 });
 				} else {
-					mesh.material.opacity += (0 - mesh.material.opacity) * 0.05;
+					gsap.to(mesh.material, { opacity: 0, duration: 1 });
 				}
 				mesh.material.needsUpdate = true;
 				mesh.material.transparent = true;
 			}
 
-			// //ページが切り替わるとオブジェクトが移動する
-			// if (mesh?.position) {
-			// 	if (2 === page) {
-			// 		gsap.to(mesh.position, { x: 0, y: 0, z: 3, duration: 1 });
-			// 	} else {
-			// 		gsap.to(mesh.position, { x: 0, y: 0, z: 0, duration: 1 });
-			// 	}
-			// }
+			//ページが切り替わるとオブジェクトが移動する
+			if (mesh?.position) {
+				if (2 === page) {
+					gsap.to(mesh.position, { x: 0, y: 0, z: 3, duration: 1 });
+				} else {
+					gsap.to(mesh.position, { x: 0, y: 0, z: 0, duration: 1 });
+				}
+			}
 
 			if (mesh?.geometry) {
 				//ウィンドウサイズによってオブジェクトの大きさを変更

@@ -1,4 +1,4 @@
-import { getWindowSize } from "@/app/hooks/GetWindowSize";
+import { getWindowSize } from "@/app/hooks/getWindowSize";
 import { ContactShadows, MeshTransmissionMaterial } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import gsap from "gsap";

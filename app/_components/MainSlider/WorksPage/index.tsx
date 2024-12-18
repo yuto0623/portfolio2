@@ -1,3 +1,4 @@
+import { useIsTouchDevice } from "@/app/hooks/useIsTouchDevice";
 import {
 	Environment,
 	Scroll,
@@ -6,6 +7,7 @@ import {
 	useScroll,
 } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { is } from "@react-three/fiber/dist/declarations/src/core/utils";
 import { gsap } from "gsap";
 import { useQueryState } from "nuqs";
 import { use, useEffect, useRef, useState } from "react";
@@ -98,12 +100,20 @@ function ScrollCheck({
 }) {
 	const data = useScroll();
 	const prevOffset = useRef(0);
+	const isTouchDevice = useIsTouchDevice();
 
 	useFrame(() => {
 		const currentOffset = data.offset;
 		const delta = Math.abs(currentOffset - prevOffset.current);
 
 		const edgeThreshold = 0.0001;
+
+		if (isTouchDevice) {
+			setIsAllowSlidePrev(true);
+			setIsAllowSlideNext(true);
+			setStopScroll(false);
+			return;
+		}
 
 		if (delta < 0.0001) {
 			if (currentOffset <= edgeThreshold) {

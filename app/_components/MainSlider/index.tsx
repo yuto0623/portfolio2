@@ -41,6 +41,9 @@ export default function MainSlider() {
 
 	const pageHandleChange = (swiper: SwiperType) => {
 		setPage(swiper.activeIndex + 1);
+		if (swiper.activeIndex !== 1) {
+			setStopScroll(false);
+		}
 	};
 
 	const onInit = (Swiper: SwiperCore): void => {

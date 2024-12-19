@@ -37,20 +37,20 @@ export default function WorksPage({
 		<>
 			<div
 				className={`h-[70%] w-full left-0 top-full -translate-y-full absolute
-              transition-all duration-500 md:left-1/2 md:top-1/2 md:h-full md:w-[50%] md:-translate-y-1/2
+              transition-all duration-500 md:top-1/2 md:h-full md:-translate-y-1/2
               `}
 			>
 				<Canvas
 					gl={{ antialias: true }}
 					shadows
 					camera={{ position: [0, 0, 5] }}
-					className="[mask-image:linear-gradient(to_left,rgba(255,255,255,1)75%,rgba(255,255,255,0))]"
+					className="[mask-image:linear-gradient(to_left,rgba(255,255,255,1)25%,rgba(255,255,255,0)50%)]"
 				>
 					<Environment preset="studio" />
 					<ambientLight intensity={0.1} />
 					<spotLight position={[20, 20, 10]} penumbra={1} angle={0.2} />
 					<directionalLight color={"white"} position={[0, 5, 5]} />
-					<ScrollControls pages={3} damping={0.1} horizontal>
+					<ScrollControls pages={2} damping={0.1} horizontal>
 						<Scroll>
 							<ScrollCheck
 								stopScroll={stopScroll}
@@ -58,14 +58,6 @@ export default function WorksPage({
 								setIsAllowSlideNext={setIsAllowSlideNext}
 								setIsAllowSlidePrev={setIsAllowSlidePrev}
 							/>
-							<Text
-								color={isTheme === "dark" ? "#ffffff" : "#000000"}
-								position={[0, 0, 0]}
-								fontSize={1}
-								castShadow
-							>
-								test
-							</Text>
 							<Text
 								color={isTheme === "dark" ? "#ffffff" : "#000000"}
 								position={[2, 0, 0]}
@@ -85,6 +77,22 @@ export default function WorksPage({
 							<Text
 								color={isTheme === "dark" ? "#ffffff" : "#000000"}
 								position={[6, 0, 0]}
+								fontSize={1}
+								castShadow
+							>
+								test
+							</Text>
+							<Text
+								color={isTheme === "dark" ? "#ffffff" : "#000000"}
+								position={[8, 0, 0]}
+								fontSize={1}
+								castShadow
+							>
+								test
+							</Text>
+							<Text
+								color={isTheme === "dark" ? "#ffffff" : "#000000"}
+								position={[10, 0, 0]}
 								fontSize={1}
 								castShadow
 							>

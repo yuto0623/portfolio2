@@ -32,7 +32,7 @@ export default function MainObject({ page }: { page: number }) {
 			if (mesh?.position) {
 				if (2 === page) {
 					if (width < 768) {
-						gsap.to(mesh.position, { x: 0, y: 2.5, z: 0, duration: 1 });
+						gsap.to(mesh.position, { x: 0, y: 2, z: 0, duration: 1 });
 					} else {
 						gsap.to(mesh.position, {
 							x: 0,

@@ -1,6 +1,7 @@
 import { useIsTouchDevice } from "@/app/hooks/useIsTouchDevice";
 import {
 	Environment,
+	Image,
 	Scroll,
 	ScrollControls,
 	Text,
@@ -50,7 +51,10 @@ export default function WorksPage({
 								setIsAllowSlideNext={setIsAllowSlideNext}
 								setIsAllowSlidePrev={setIsAllowSlidePrev}
 							/>
-							<Text
+							<Image url="test.jpg" position={[2, 0, 0]}>
+								<planeGeometry args={[1, 1]} />
+							</Image>
+							{/* <Text
 								color={isTheme === "dark" ? "#ffffff" : "#000000"}
 								position={[2, 0, 0]}
 								fontSize={1}
@@ -89,7 +93,7 @@ export default function WorksPage({
 								castShadow
 							>
 								test
-							</Text>
+							</Text> */}
 						</Scroll>
 					</ScrollControls>
 				</Canvas>

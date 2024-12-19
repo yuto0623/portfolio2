@@ -25,14 +25,6 @@ export default function WorksPage({
 }) {
 	const [page, setPage] = useQueryState("page");
 
-	useEffect(() => {
-		if (stopScroll) {
-			document.body.style.overflow = "hidden";
-		} else {
-			document.body.style.overflow = "visible";
-		}
-	});
-
 	return (
 		<>
 			<div

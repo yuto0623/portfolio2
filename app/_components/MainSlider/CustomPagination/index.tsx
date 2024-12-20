@@ -15,7 +15,7 @@ export default function CustomPagination({ page }: { page: number }) {
 						key={item}
 						className={`flex items-start relative transition-all duration-300 cursor-pointer [writing-mode:vertical-rl]
 						
-							 md:[writing-mode:horizontal-tb] md:block ${index + 1 === page ? "text-2xl md:text-4xl md:underline" : ""}`}
+							 md:[writing-mode:horizontal-tb] md:block ${index + 1 === page ? "text-2xl md:text-4xl" : ""}`}
 					>
 						{item}
 					</li>

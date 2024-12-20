@@ -70,13 +70,15 @@ export default function ({
 		if (width < 1024) {
 			if (textRef.current && "fontSize" in textRef.current) {
 				(textRef.current as unknown as { fontSize: number }).fontSize +=
-					(1 - (textRef.current as unknown as { fontSize: number }).fontSize) *
+					(0.7 -
+						(textRef.current as unknown as { fontSize: number }).fontSize) *
 					0.05;
 			}
 		} else if (width >= 1024) {
 			if (textRef.current && "fontSize" in textRef.current) {
 				(textRef.current as unknown as { fontSize: number }).fontSize +=
-					(2 - (textRef.current as unknown as { fontSize: number }).fontSize) *
+					(1.5 -
+						(textRef.current as unknown as { fontSize: number }).fontSize) *
 					0.05;
 			}
 		}
@@ -115,9 +117,8 @@ export default function ({
 			ref={textRef}
 			color={isTheme === "dark" ? "#ffffff" : "#000000"}
 			position={position}
-			fontSize={2}
 			rotation={rotation}
-			castShadow
+			font="/font/MontserratSubrayada-Regular.ttf"
 		>
 			{children}
 		</Text>

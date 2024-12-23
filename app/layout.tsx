@@ -12,17 +12,6 @@ const MontserratSubrayadaRegular = localFont({
 	weight: "400",
 });
 
-// const squadaOne = localFont({
-// 	src: "./_fonts/SquadaOne.woff2",
-// 	variable: "--font-squada-one",
-// 	weight: "400",
-// });
-// const geistMono = localFont({
-// 	src: "./_fonts/GeistMonoVF.woff",
-// 	variable: "--font-geist-mono",
-// 	weight: "100 900",
-// });
-
 export const metadata: Metadata = {
 	title: "Yuto Shintani's portfolio",
 	description: "Yuto Shintani's portfolio",

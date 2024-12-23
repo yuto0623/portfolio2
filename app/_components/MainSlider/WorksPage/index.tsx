@@ -1,3 +1,4 @@
+import { type Works, type WorksList, client } from "@/app/_libs/microCMS";
 import { useIsTouchDevice } from "@/app/hooks/useIsTouchDevice";
 import {
 	Environment,
@@ -8,8 +9,9 @@ import {
 	useScroll,
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
+import type { GetStaticProps } from "next";
 import { useQueryState } from "nuqs";
-import { useEffect, useRef } from "react";
+import { use, useEffect, useRef, useState } from "react";
 
 export default function WorksPage({
 	isTheme,
@@ -25,6 +27,16 @@ export default function WorksPage({
 	setIsAllowSlidePrev: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
 	const [page, setPage] = useQueryState("page");
+	// const [works, setWorks] = useState<WorksList>();
+
+	// useEffect(() => {
+	// 	const fetchData = async () => {
+	// 		const data = await client.get<WorksList>({ endpoint: "works" });
+	// 		setWorks(data);
+	// 	};
+	// 	fetchData();
+	// 	console.log(works);
+	// }, [works]);
 
 	return (
 		<>

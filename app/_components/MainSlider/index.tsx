@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import type SwiperCore from "swiper";
 import type { Swiper as SwiperType } from "swiper";
 import { Swiper, type SwiperProps, SwiperSlide, useSwiper } from "swiper/react";

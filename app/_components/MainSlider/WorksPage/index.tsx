@@ -37,7 +37,7 @@ export default function WorksPage({
 					gl={{ antialias: true }}
 					shadows
 					camera={{ position: [0, 0, 5] }}
-					className="md:[mask-image:linear-gradient(to_left,rgba(255,255,255,1)25%,rgba(255,255,255,0)50%)]"
+					className="md:[mask-image:linear-gradient(to_left,rgba(255,255,255,1)40%,rgba(255,255,255,0)50%)]"
 				>
 					<Environment preset="studio" />
 					<ambientLight intensity={0.1} />

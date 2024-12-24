@@ -66,24 +66,24 @@ export default function WorksPage({
 							{works?.contents.map((work, index) => {
 								const aspectRatio =
 									work.thumbnail.width / work.thumbnail.height;
-								const baseSize = 1.4; //基準サイズ
+								const baseSize = 2; //基準サイズ
 								const width = baseSize * aspectRatio;
 								const height = baseSize;
 								return (
 									<>
 										<Text
 											color={isTheme === "dark" ? "#ffffff" : "#000000"}
-											position={[2 * (index + 1), 0, 0]}
-											fontSize={0.1}
+											position={[2 * (2 * (index + 1)), -0.2, 0]}
+											fontSize={0.2}
 											castShadow
-											key={work.id}
+											key={work.id + Math.random()}
 										>
 											{work.title}
 										</Text>
 										<Image
 											url={work.thumbnail.url}
-											position={[2 * (index + 1), 1, 0]}
-											key={work.id}
+											position={[2 * (2 * (index + 1)), 1, 0]}
+											key={work.id + Math.random()}
 										>
 											<planeGeometry args={[width, height]} />
 										</Image>

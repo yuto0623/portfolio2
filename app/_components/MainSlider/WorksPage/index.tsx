@@ -55,7 +55,7 @@ export default function WorksPage({
 			{works?.contents.map((work) => (
 				<div
 					key={work.id}
-					className={`backdrop-filter backdrop-blur-sm bg-opacity-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 bg-clip-padding z-10 transition-all duration-300 rounded-2xl font-sans text-lg
+					className={`backdrop-filter backdrop-blur-sm bg-opacity-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 bg-clip-padding z-10 transition-all duration-300 rounded-2xl font-sans
 						${isTheme === "dark" ? "bg-gray-400" : "bg-gray-400"}
 						${isModal === work.id ? "visible opacity-100" : "invisible opacity-0"}`}
 				>
@@ -65,13 +65,19 @@ export default function WorksPage({
 						width={work.thumbnail.width}
 						height={work.thumbnail.height}
 					/>
-					<p>
-						{work.skill.map((text) => {
-							return `${text}/`;
-						})}
-					</p>
-					<Link href={work.url}>{work.url}</Link>
-					<p>{work.title}</p>
+					<div
+						className={`flex justify-between items-center ${isTheme === "dark" ? "text-gray-200" : "text-gray-800"}`}
+					>
+						<Link href={work.url} target="_blank">
+							{work.url}
+						</Link>
+						<p>
+							{work.skill.map((text, index) => {
+								return `${text}${index !== work.skill.length - 1 ? " / " : ""}`;
+							})}
+						</p>
+					</div>
+					<h3 className="text-lg mb-3">{work.title}</h3>
 					<p>{parse(work.description)}</p>
 				</div>
 			))}

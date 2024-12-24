@@ -1,4 +1,4 @@
-import { type Works, type WorksList, client } from "@/app/_libs/microCMS";
+import { type WorksList, client } from "@/app/_libs/microCMS";
 import { useIsTouchDevice } from "@/app/hooks/useIsTouchDevice";
 import {
 	Environment,
@@ -9,7 +9,7 @@ import {
 	useScroll,
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { use, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function WorksPage({
 	isTheme,
@@ -49,7 +49,7 @@ export default function WorksPage({
 					gl={{ antialias: true }}
 					shadows
 					camera={{ position: [0, 0, 5] }}
-					className="md:[mask-image:linear-gradient(to_left,rgba(255,255,255,1)40%,rgba(255,255,255,0)50%)]"
+					className="md:[mask-image:linear-gradient(to_left,rgba(255,255,255,1)50%,rgba(255,255,255,0)70%)]"
 				>
 					<Environment preset="studio" />
 					<ambientLight intensity={0.1} />
@@ -69,20 +69,28 @@ export default function WorksPage({
 								const baseSize = 2; //基準サイズ
 								const width = baseSize * aspectRatio;
 								const height = baseSize;
+
+								// タイトルを省略
+								const truncateTitle = (title: string, maxLength = 20) => {
+									return title.length > maxLength
+										? `${title.slice(0, maxLength)}...`
+										: title;
+								};
+
 								return (
 									<>
 										<Text
 											color={isTheme === "dark" ? "#ffffff" : "#000000"}
-											position={[2 * (2 * (index + 1)), -0.2, 0]}
-											fontSize={0.2}
+											position={[2 * (2 * (index + 1)), -1, 0]}
+											fontSize={0.15}
 											castShadow
 											key={work.id + Math.random()}
 										>
-											{work.title}
+											{truncateTitle(work.title)}
 										</Text>
 										<Image
 											url={work.thumbnail.url}
-											position={[2 * (2 * (index + 1)), 1, 0]}
+											position={[2 * (2 * (index + 1)), 0.2, 0]}
 											key={work.id + Math.random()}
 										>
 											<planeGeometry args={[width, height]} />

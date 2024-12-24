@@ -66,7 +66,6 @@ export default function MainSlider({
 		direction: "vertical",
 		slidesPerView: 1,
 		onSlideChange: (swiper) => pageHandleChange(swiper),
-		// onSwiper: (swiper) => console.log(swiper),
 		initialSlide: page - 1,
 		modules: [Pagination, Mousewheel],
 		pagination: true,
@@ -81,27 +80,16 @@ export default function MainSlider({
 		if (swiper) {
 			if (stopScroll) {
 				swiper.mousewheel.disable();
-				// console.log("スクロール無効");
 			} else {
 				swiper.mousewheel.enable();
-				// console.log("スクロール有効");
 			}
 
 			if (page !== 2) {
-				// console.log("worksページ以外");
 				swiper.allowSlideNext = true;
 				swiper.allowSlidePrev = true;
-				// console.log("nextスクロール有効");
-				// console.log("prevスクロール有効");
 			} else {
 				swiper.allowSlideNext = isAllowSlideNext;
 				swiper.allowSlidePrev = isAllowSlidePrev;
-				// console.log(
-				// 	isAllowSlideNext ? "nextスクロール有効" : "nextスクロール無効",
-				// );
-				// console.log(
-				// 	isAllowSlidePrev ? "prevスクロール有効" : "prevスクロール無効",
-				// );
 			}
 		}
 	}, [stopScroll, isAllowSlideNext, isAllowSlidePrev, page]);

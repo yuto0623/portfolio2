@@ -55,7 +55,7 @@ export default function WorksPage({
 			{works?.contents.map((work) => (
 				<div
 					key={work.id}
-					className={`backdrop-filter backdrop-blur-sm bg-opacity-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 bg-clip-padding z-10 transition-all duration-300 rounded-2xl font-sans
+					className={`backdrop-filter backdrop-blur-sm bg-opacity-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 bg-clip-padding z-10 transition-all duration-300 rounded-2xl font-sans 
 						${isTheme === "dark" ? "bg-gray-400" : "bg-gray-400"}
 						${isModal === work.id ? "visible opacity-100" : "invisible opacity-0"}`}
 				>
@@ -78,7 +78,16 @@ export default function WorksPage({
 						</p>
 					</div>
 					<h3 className="text-lg mb-3">{work.title}</h3>
-					<p>{parse(work.description)}</p>
+					<p className="mb-3">{parse(work.description)}</p>
+					<div className="flex justify-center">
+						<button
+							type="button"
+							onClick={() => ToggleModal("")}
+							className="px-8 py-2 backdrop-filter backdrop-blur-sm bg-opacity-10 bg-clip-padding rounded-xl hover:bg-white hover:bg-opacity-10"
+						>
+							閉じる
+						</button>
+					</div>
 				</div>
 			))}
 			<div

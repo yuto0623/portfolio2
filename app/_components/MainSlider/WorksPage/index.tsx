@@ -10,6 +10,7 @@ import {
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { default as NextImage } from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 export default function WorksPage({
@@ -63,7 +64,14 @@ export default function WorksPage({
 						width={work.thumbnail.width}
 						height={work.thumbnail.height}
 					/>
+					<p>
+						{work.skill.map((text) => {
+							return `${text}/`;
+						})}
+					</p>
+					<Link href={work.url}>{work.url}</Link>
 					<p>{work.title}</p>
+					<p>{work.description}</p>
 				</div>
 			))}
 			<div

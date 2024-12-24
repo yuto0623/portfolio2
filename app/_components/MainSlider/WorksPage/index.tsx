@@ -9,6 +9,7 @@ import {
 	useScroll,
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
+import { default as NextImage } from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 export default function WorksPage({
@@ -56,6 +57,12 @@ export default function WorksPage({
 						${isTheme === "dark" ? "bg-gray-600" : "bg-gray-200"}
 						${isModal === work.id ? "visible opacity-100" : "invisible opacity-0"}`}
 				>
+					<NextImage
+						src={work.thumbnail.url}
+						alt={work.title}
+						width={work.thumbnail.width}
+						height={work.thumbnail.height}
+					/>
 					<p>{work.title}</p>
 				</div>
 			))}

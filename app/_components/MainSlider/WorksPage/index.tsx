@@ -9,8 +9,6 @@ import {
 	useScroll,
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import type { GetStaticProps } from "next";
-import { useQueryState } from "nuqs";
 import { use, useEffect, useRef, useState } from "react";
 
 export default function WorksPage({
@@ -26,17 +24,19 @@ export default function WorksPage({
 	setIsAllowSlideNext: React.Dispatch<React.SetStateAction<boolean>>;
 	setIsAllowSlidePrev: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-	const [page, setPage] = useQueryState("page");
-	// const [works, setWorks] = useState<WorksList>();
+	const [works, setWorks] = useState<WorksList>();
 
-	// useEffect(() => {
-	// 	const fetchData = async () => {
-	// 		const data = await client.get<WorksList>({ endpoint: "works" });
-	// 		setWorks(data);
-	// 	};
-	// 	fetchData();
-	// 	console.log(works);
-	// }, [works]);
+	useEffect(() => {
+		const fetchData = async () => {
+			const data = await client.getList({ endpoint: "works" });
+			setWorks(data);
+		};
+		fetchData();
+	}, []);
+
+	useEffect(() => {
+		console.log(works);
+	}, [works]);
 
 	return (
 		<>
@@ -63,49 +63,33 @@ export default function WorksPage({
 								setIsAllowSlideNext={setIsAllowSlideNext}
 								setIsAllowSlidePrev={setIsAllowSlidePrev}
 							/>
-							<Image url="test.jpg" position={[2, 0, 0]}>
-								<planeGeometry args={[1, 1]} />
-							</Image>
-							{/* <Text
-								color={isTheme === "dark" ? "#ffffff" : "#000000"}
-								position={[2, 0, 0]}
-								fontSize={1}
-								castShadow
-							>
-								test
-							</Text>
-							<Text
-								color={isTheme === "dark" ? "#ffffff" : "#000000"}
-								position={[4, 0, 0]}
-								fontSize={1}
-								castShadow
-							>
-								test
-							</Text>
-							<Text
-								color={isTheme === "dark" ? "#ffffff" : "#000000"}
-								position={[6, 0, 0]}
-								fontSize={1}
-								castShadow
-							>
-								test
-							</Text>
-							<Text
-								color={isTheme === "dark" ? "#ffffff" : "#000000"}
-								position={[8, 0, 0]}
-								fontSize={1}
-								castShadow
-							>
-								test
-							</Text>
-							<Text
-								color={isTheme === "dark" ? "#ffffff" : "#000000"}
-								position={[10, 0, 0]}
-								fontSize={1}
-								castShadow
-							>
-								test
-							</Text> */}
+							{works?.contents.map((work, index) => {
+								const aspectRatio =
+									work.thumbnail.width / work.thumbnail.height;
+								const baseSize = 1.4; //基準サイズ
+								const width = baseSize * aspectRatio;
+								const height = baseSize;
+								return (
+									<>
+										<Text
+											color={isTheme === "dark" ? "#ffffff" : "#000000"}
+											position={[2 * (index + 1), 0, 0]}
+											fontSize={0.1}
+											castShadow
+											key={work.id}
+										>
+											{work.title}
+										</Text>
+										<Image
+											url={work.thumbnail.url}
+											position={[2 * (index + 1), 1, 0]}
+											key={work.id}
+										>
+											<planeGeometry args={[width, height]} />
+										</Image>
+									</>
+								);
+							})}
 						</Scroll>
 					</ScrollControls>
 				</Canvas>

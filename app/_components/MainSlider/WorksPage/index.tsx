@@ -25,6 +25,7 @@ export default function WorksPage({
 	setIsAllowSlidePrev: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
 	const [works, setWorks] = useState<WorksList>();
+	const [isModal, setIsModal] = useState<string | null>(null);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -38,8 +39,26 @@ export default function WorksPage({
 		console.log(works);
 	}, [works]);
 
+	const ToggleModal = (id: string) => {
+		if (isModal === id) {
+			setIsModal(null);
+		} else {
+			setIsModal(id);
+		}
+	};
+
 	return (
 		<>
+			{works?.contents.map((work) => (
+				<div
+					key={work.id}
+					className={`backdrop-filter backdrop-blur-sm bg-opacity-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 bg-clip-padding z-10 transition-all duration-300 rounded-2xl 
+						${isTheme === "dark" ? "bg-gray-600" : "bg-gray-200"}
+						${isModal === work.id ? "visible opacity-100" : "invisible opacity-0"}`}
+				>
+					<p>{work.title}</p>
+				</div>
+			))}
 			<div
 				className={`h-[70%] w-full left-0 top-full -translate-y-full absolute
               transition-all duration-500 md:top-1/2 md:h-full md:-translate-y-1/2
@@ -85,6 +104,7 @@ export default function WorksPage({
 											fontSize={0.15}
 											castShadow
 											key={work.id + Math.random()}
+											onClick={() => ToggleModal(work.id)}
 										>
 											{truncateTitle(work.title)}
 										</Text>
@@ -92,6 +112,7 @@ export default function WorksPage({
 											url={work.thumbnail.url}
 											position={[2 * (2 * (index + 1)), 0.2, 0]}
 											key={work.id + Math.random()}
+											onClick={() => ToggleModal(work.id)}
 										>
 											<planeGeometry args={[width, height]} />
 										</Image>

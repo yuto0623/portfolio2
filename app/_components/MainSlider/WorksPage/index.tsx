@@ -9,6 +9,7 @@ import {
 	useScroll,
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
+import parse from "html-react-parser";
 import { default as NextImage } from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -71,7 +72,7 @@ export default function WorksPage({
 					</p>
 					<Link href={work.url}>{work.url}</Link>
 					<p>{work.title}</p>
-					<p>{work.description}</p>
+					<p>{parse(work.description)}</p>
 				</div>
 			))}
 			<div

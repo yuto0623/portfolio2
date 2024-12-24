@@ -1,4 +1,5 @@
 import { type WorksList, client } from "@/app/_libs/microCMS";
+import { getWindowSize } from "@/app/hooks/GetWindowSize";
 import { useIsTouchDevice } from "@/app/hooks/useIsTouchDevice";
 import {
 	Environment,
@@ -29,6 +30,7 @@ export default function WorksPage({
 }) {
 	const [works, setWorks] = useState<WorksList>();
 	const [isModal, setIsModal] = useState<string | null>(null);
+	const { width, height } = getWindowSize();
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -131,7 +133,11 @@ export default function WorksPage({
 									<>
 										<Text
 											color={isTheme === "dark" ? "#ffffff" : "#000000"}
-											position={[2 * (2 * (index + 1)), -1, 0]}
+											position={[
+												2 * (2 * (width < 768 ? index : index + 1)),
+												-1,
+												0,
+											]}
 											fontSize={0.15}
 											castShadow
 											key={work.id + Math.random()}
@@ -141,7 +147,11 @@ export default function WorksPage({
 										</Text>
 										<Image
 											url={work.thumbnail.url}
-											position={[2 * (2 * (index + 1)), 0.2, 0]}
+											position={[
+												2 * (2 * (width < 768 ? index : index + 1)),
+												0.2,
+												0,
+											]}
 											key={work.id + Math.random()}
 											onClick={() => ToggleModal(work.id)}
 										>

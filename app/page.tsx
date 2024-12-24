@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import MainSlider from "./_components/MainSlider";
+import Scroll from "./_components/MainSlider/Scroll";
 import Background from "./_components/ThreeCanvas";
 
 export default function Home() {
@@ -10,7 +11,7 @@ export default function Home() {
 			</Suspense>
 			<main>
 				<Suspense fallback={null}>
-					<MainSlider />
+					<MainSlider page1={<Scroll />} />
 				</Suspense>
 			</main>
 		</>

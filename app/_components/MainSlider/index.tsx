@@ -5,13 +5,26 @@ import { Swiper, type SwiperProps, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
 import { useTheme } from "next-themes";
 import { parseAsInteger, useQueryState } from "nuqs";
+import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import { Mousewheel, Pagination } from "swiper/modules";
 import CustomPagination from "./CustomPagination";
 import Scroll from "./Scroll";
 import WorksPage from "./WorksPage";
 
-export default function MainSlider() {
+type MainSliderProps = {
+	page1: React.ReactNode;
+	page2?: React.ReactNode;
+	page3?: React.ReactNode;
+	page4?: React.ReactNode;
+};
+
+export default function MainSlider({
+	page1,
+	page2,
+	page3,
+	page4,
+}: MainSliderProps) {
 	const [stopScroll, setStopScroll] = useState(false);
 	const [isTheme, setIsTheme] = useState<string | undefined>("");
 	const [isAllowSlideNext, setIsAllowSlideNext] = useState(false);
@@ -96,9 +109,7 @@ export default function MainSlider() {
 	return (
 		<>
 			<Swiper {...swiperProps}>
-				<SwiperSlide className="relative">
-					<Scroll page={page} />
-				</SwiperSlide>
+				<SwiperSlide className="relative">{page1}</SwiperSlide>
 				<SwiperSlide className="relative">
 					<WorksPage
 						isTheme={isTheme || ""}

@@ -1,10 +1,20 @@
+"use client";
 import { useTheme } from "next-themes";
+import { useQueryState } from "nuqs";
 import { useEffect, useState } from "react";
 import { HiOutlineArrowLongDown } from "react-icons/hi2";
 
-export default function Scroll({ page }: { page: number }) {
+export default function Scroll() {
+	const [page, setPage] = useQueryState("page");
 	const { theme, resolvedTheme } = useTheme();
 	const [isTheme, setIsTheme] = useState<string | undefined>("");
+	const [currentPage, setCurrentPage] = useState<string>("1");
+
+	useEffect(() => {
+		if (page) {
+			setCurrentPage(page.toString());
+		}
+	}, [page]);
 
 	useEffect(() => {
 		let currentTheme: string | undefined;
@@ -20,7 +30,7 @@ export default function Scroll({ page }: { page: number }) {
 		<div
 			className={`absolute left-5 bottom-10 [writing-mode:vertical-rl] text-sm transition-all 
 							md:bottom-1/2 md:translate-y-1/2 
-							 ${page === 1 ? "opacity-100 duration-[2000ms]" : "opacity-0 -translate-x-full duration-300"}`}
+							 ${currentPage === "1" ? "opacity-100 translate-x-0 duration-[2000ms]" : "opacity-0 -translate-x-full duration-300"}`}
 		>
 			Scroll
 			<span

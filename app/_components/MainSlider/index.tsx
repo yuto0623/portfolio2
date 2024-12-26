@@ -97,9 +97,7 @@ export default function MainSlider({
 						setIsAllowSlidePrev={setIsAllowSlidePrev}
 					/>
 				</SwiperSlide>
-				<SwiperSlide>
-					<p>3Page</p>
-				</SwiperSlide>
+				<SwiperSlide>{page3}</SwiperSlide>
 				<SwiperSlide>
 					<p>4Page</p>
 				</SwiperSlide>

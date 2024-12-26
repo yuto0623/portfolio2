@@ -1,3 +1,4 @@
+"use client";
 import { useCustomTheme } from "@/app/hooks/useCustomTheme";
 
 type GlassContainerProps = {

@@ -91,7 +91,6 @@ export default function MainSlider({
 				<SwiperSlide className="relative">{page1}</SwiperSlide>
 				<SwiperSlide className="relative">
 					<WorksPage
-						isTheme={isTheme || ""}
 						stopScroll={stopScroll}
 						setStopScroll={setStopScroll}
 						setIsAllowSlideNext={setIsAllowSlideNext}

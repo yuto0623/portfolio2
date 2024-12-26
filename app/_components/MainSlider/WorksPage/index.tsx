@@ -1,4 +1,5 @@
 import { type WorksList, client } from "@/app/_libs/microCMS";
+import { useCustomTheme } from "@/app/hooks/useCustomTheme";
 import { useIsTouchDevice } from "@/app/hooks/useIsTouchDevice";
 import { useWindowSize } from "@/app/hooks/useWindowSize";
 import {
@@ -17,13 +18,11 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import GlassContainer from "../../GlassContainer";
 
 export default function WorksPage({
-	isTheme,
 	stopScroll,
 	setStopScroll,
 	setIsAllowSlideNext,
 	setIsAllowSlidePrev,
 }: {
-	isTheme: string;
 	stopScroll: boolean;
 	setStopScroll: React.Dispatch<React.SetStateAction<boolean>>;
 	setIsAllowSlideNext: React.Dispatch<React.SetStateAction<boolean>>;
@@ -31,7 +30,7 @@ export default function WorksPage({
 }) {
 	const [works, setWorks] = useState<WorksList>();
 	const [isModal, setIsModal] = useState<string | null>(null);
-	const { width, height } = useWindowSize();
+	const isTheme = useCustomTheme();
 
 	useEffect(() => {
 		const fetchData = async () => {

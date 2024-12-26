@@ -13,7 +13,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import parse from "html-react-parser";
 import { default as NextImage } from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 
 export default function WorksPage({
 	isTheme,
@@ -80,7 +80,7 @@ export default function WorksPage({
 						</p>
 					</div>
 					<h3 className="text-lg mb-3">{work.title}</h3>
-					<p className="mb-3">{parse(work.description)}</p>
+					<div className="mb-3">{parse(work.description)}</div>
 					<div className="flex justify-center">
 						<button
 							type="button"
@@ -130,7 +130,7 @@ export default function WorksPage({
 								};
 
 								return (
-									<>
+									<Fragment key={work.id}>
 										<Text
 											color={isTheme === "dark" ? "#ffffff" : "#000000"}
 											position={[
@@ -140,7 +140,6 @@ export default function WorksPage({
 											]}
 											fontSize={0.15}
 											castShadow
-											key={work.id + Math.random()}
 											onClick={() => ToggleModal(work.id)}
 										>
 											{truncateTitle(work.title)}
@@ -152,12 +151,11 @@ export default function WorksPage({
 												0.2,
 												0,
 											]}
-											key={work.id + Math.random()}
 											onClick={() => ToggleModal(work.id)}
 										>
 											<planeGeometry args={[width, height]} />
 										</Image>
-									</>
+									</Fragment>
 								);
 							})}
 						</Scroll>

@@ -11,6 +11,7 @@ import { Mousewheel, Pagination } from "swiper/modules";
 import CustomPagination from "./CustomPagination";
 import Scroll from "./Scroll";
 import WorksPage from "./WorksPage";
+import { useCustomTheme } from "@/app/hooks/useCustomTheme";
 
 type MainSliderProps = {
 	page1: React.ReactNode;
@@ -26,9 +27,9 @@ export default function MainSlider({
 	page4,
 }: MainSliderProps) {
 	const [stopScroll, setStopScroll] = useState(false);
-	const [isTheme, setIsTheme] = useState<string | undefined>("");
 	const [isAllowSlideNext, setIsAllowSlideNext] = useState(false);
 	const [isAllowSlidePrev, setIsAllowSlidePrev] = useState(false);
+	const isTheme = useCustomTheme();
 	const swiperRef = useRef<SwiperCore>();
 	const { theme, resolvedTheme } = useTheme();
 	const [page, setPage] = useQueryState(
@@ -40,16 +41,6 @@ export default function MainSlider({
 			clearOnDefault: false,
 		}),
 	);
-
-	useEffect(() => {
-		let currentTheme: string | undefined;
-		if (resolvedTheme === "system") {
-			currentTheme = theme;
-		} else {
-			currentTheme = resolvedTheme;
-		}
-		setIsTheme(currentTheme);
-	}, [theme, resolvedTheme]);
 
 	const pageHandleChange = (swiper: SwiperType) => {
 		setPage(swiper.activeIndex + 1);

@@ -14,7 +14,7 @@ export default function GlassContainer({
 	const isTheme = useCustomTheme();
 	return (
 		<div
-			className={`backdrop-filter backdrop-blur-sm bg-opacity-40 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 bg-clip-padding z-10 transition-all duration-300 font-sans border-2 border-[rgba(255,255,255,0.1)] rounded-2xl w-[90%] max-w-[600px] 
+			className={`backdrop-filter backdrop-blur-sm bg-opacity-40 p-10 bg-clip-padding transition-all duration-300 font-sans border-2 border-[rgba(255,255,255,0.1)] rounded-2xl  
 						${isTheme === "dark" ? "bg-[#292929]" : "bg-gray-200"} 
 						${invisible ? "invisible opacity-0" : "visible opacity-100"} 
             ${className}`}

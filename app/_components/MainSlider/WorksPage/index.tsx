@@ -55,7 +55,11 @@ export default function WorksPage({
 	return (
 		<>
 			{works?.contents.map((work) => (
-				<GlassContainer key={work.id} invisible={isModal !== work.id}>
+				<GlassContainer
+					key={work.id}
+					invisible={isModal !== work.id}
+					className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-[90%] max-w-[600px]"
+				>
 					<NextImage
 						src={work.thumbnail.url}
 						alt={work.title}

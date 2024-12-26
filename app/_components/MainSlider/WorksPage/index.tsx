@@ -1,6 +1,6 @@
 import { type WorksList, client } from "@/app/_libs/microCMS";
-import { getWindowSize } from "@/app/hooks/GetWindowSize";
 import { useIsTouchDevice } from "@/app/hooks/useIsTouchDevice";
+import { useWindowSize } from "@/app/hooks/useWindowSize";
 import {
 	Environment,
 	Image,
@@ -30,7 +30,7 @@ export default function WorksPage({
 }) {
 	const [works, setWorks] = useState<WorksList>();
 	const [isModal, setIsModal] = useState<string | null>(null);
-	const { width, height } = getWindowSize();
+	const { width, height } = useWindowSize();
 
 	useEffect(() => {
 		const fetchData = async () => {

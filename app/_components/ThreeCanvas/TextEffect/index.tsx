@@ -1,5 +1,5 @@
 "use client";
-import { getWindowSize } from "@/app/hooks/GetWindowSize";
+import { useWindowSize } from "@/app/hooks/useWindowSize";
 import { Text } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import gsap from "gsap";
@@ -24,7 +24,7 @@ export default function ({
 	const { theme, resolvedTheme } = useTheme();
 	const textRef = useRef<Mesh>(null);
 	const [targetOpacity, setTargetOpacity] = useState<number>(0);
-	const { height, width } = getWindowSize();
+	const { height, width } = useWindowSize();
 
 	useEffect(() => {
 		let currentTheme: string | undefined;

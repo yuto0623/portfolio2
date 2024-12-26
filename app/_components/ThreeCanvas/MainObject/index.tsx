@@ -1,4 +1,4 @@
-import { getWindowSize } from "@/app/hooks/GetWindowSize";
+import { useWindowSize } from "@/app/hooks/useWindowSize";
 import { ContactShadows, MeshTransmissionMaterial } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import gsap from "gsap";
@@ -7,7 +7,7 @@ import type { Mesh } from "three";
 
 export default function MainObject({ page }: { page: number }) {
 	const meshRefs = useRef<Mesh[]>([]);
-	const { height, width } = getWindowSize();
+	const { height, width } = useWindowSize();
 
 	useFrame(() => {
 		meshRefs.current.forEach((mesh, index) => {

@@ -14,6 +14,7 @@ import parse from "html-react-parser";
 import { default as NextImage } from "next/image";
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
+import GlassContainer from "../../GlassContainer";
 
 export default function WorksPage({
 	isTheme,
@@ -55,12 +56,7 @@ export default function WorksPage({
 	return (
 		<>
 			{works?.contents.map((work) => (
-				<div
-					key={work.id}
-					className={`backdrop-filter backdrop-blur-sm bg-opacity-40 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 bg-clip-padding z-10 transition-all duration-300 font-sans border-2 border-[rgba(255,255,255,0.1)] rounded-2xl w-[90%] max-w-[600px] 
-						${isTheme === "dark" ? "bg-gray-600" : "bg-gray-200"}
-						${isModal === work.id ? "visible opacity-100" : "invisible opacity-0"}`}
-				>
+				<GlassContainer key={work.id} invisible={isModal !== work.id}>
 					<NextImage
 						src={work.thumbnail.url}
 						alt={work.title}
@@ -90,7 +86,7 @@ export default function WorksPage({
 							閉じる
 						</button>
 					</div>
-				</div>
+				</GlassContainer>
 			))}
 			<div
 				className={`h-[70%] w-full left-0 top-full -translate-y-full absolute

@@ -1,5 +1,4 @@
 import { useCustomTheme } from "@/app/hooks/useCustomTheme";
-import { useTheme } from "next-themes";
 
 type GlassContainerProps = {
 	children: React.ReactNode;

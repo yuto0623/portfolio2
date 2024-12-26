@@ -60,18 +60,26 @@ export default function WorksPage({
 					invisible={isModal !== work.id}
 					className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-[90%] max-w-[600px]"
 				>
-					<NextImage
-						src={work.thumbnail.url}
-						alt={work.title}
-						width={work.thumbnail.width}
-						height={work.thumbnail.height}
-					/>
+					{work.thumbnail ? (
+						<NextImage
+							src={work.thumbnail.url}
+							alt={work.title}
+							width={work.thumbnail.width}
+							height={work.thumbnail.height}
+						/>
+					) : (
+						<div className="w-5 h-5 bg-gray-50" />
+					)}
 					<div
 						className={`flex justify-between items-center ${isTheme === "dark" ? "text-gray-200" : "text-gray-800"}`}
 					>
-						<Link href={work.url} target="_blank">
-							{work.url}
-						</Link>
+						{work.url ? (
+							<Link href={work.url} target="_blank">
+								{work.url}
+							</Link>
+						) : (
+							<p>Closed</p>
+						)}
 						<p>
 							{work.skill.map((text, index) => {
 								return `${text}${index !== work.skill.length - 1 ? " / " : ""}`;
@@ -115,8 +123,9 @@ export default function WorksPage({
 								setIsAllowSlidePrev={setIsAllowSlidePrev}
 							/>
 							{works?.contents.map((work, index) => {
-								const aspectRatio =
-									work.thumbnail.width / work.thumbnail.height;
+								const aspectRatio = work.thumbnail
+									? work.thumbnail.width / work.thumbnail.height
+									: 1;
 								const baseSize = 2; //基準サイズ
 								const width = baseSize * aspectRatio;
 								const height = baseSize;
@@ -143,17 +152,34 @@ export default function WorksPage({
 										>
 											{truncateTitle(work.title)}
 										</Text>
-										<Image
-											url={work.thumbnail.url}
-											position={[
-												2 * (2 * (width < 768 ? index : index + 1)),
-												0.2,
-												0,
-											]}
-											onClick={() => ToggleModal(work.id)}
-										>
-											<planeGeometry args={[width, height]} />
-										</Image>
+										{work.thumbnail ? (
+											<Image
+												url={work.thumbnail.url}
+												position={[
+													2 * (2 * (width < 768 ? index : index + 1)),
+													0.2,
+													0,
+												]}
+												onClick={() => ToggleModal(work.id)}
+											>
+												<planeGeometry args={[width, height]} />
+											</Image>
+										) : (
+											// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+											<mesh
+												position={[
+													2 * (2 * (width < 768 ? index : index + 1)),
+													0.2,
+													0,
+												]}
+												onClick={() => ToggleModal(work.id)}
+											>
+												<planeGeometry args={[width, height]} />
+												<meshBasicMaterial
+													color={isTheme === "dark" ? "#ffffff" : "#000000"}
+												/>
+											</mesh>
+										)}
 									</Fragment>
 								);
 							})}

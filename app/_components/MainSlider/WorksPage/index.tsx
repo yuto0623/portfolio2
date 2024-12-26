@@ -57,8 +57,8 @@ export default function WorksPage({
 			{works?.contents.map((work) => (
 				<div
 					key={work.id}
-					className={`backdrop-filter backdrop-blur-sm bg-opacity-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 bg-clip-padding z-10 transition-all duration-300 font-sans border-2 border-[rgba(255,255,255,0.1)] rounded-2xl
-						${isTheme === "dark" ? "bg-gray-400" : "bg-gray-400"}
+					className={`backdrop-filter backdrop-blur-sm bg-opacity-40 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 bg-clip-padding z-10 transition-all duration-300 font-sans border-2 border-[rgba(255,255,255,0.1)] rounded-2xl w-[90%] max-w-[600px] 
+						${isTheme === "dark" ? "bg-gray-600" : "bg-gray-200"}
 						${isModal === work.id ? "visible opacity-100" : "invisible opacity-0"}`}
 				>
 					<NextImage
@@ -85,7 +85,7 @@ export default function WorksPage({
 						<button
 							type="button"
 							onClick={() => ToggleModal("")}
-							className="px-8 py-2 backdrop-filter backdrop-blur-sm bg-opacity-10 bg-clip-padding rounded-xl hover:bg-white hover:bg-opacity-10"
+							className="px-8 py-2 backdrop-filter backdrop-blur-sm bg-opacity-20 bg-clip-padding rounded-xl hover:bg-white hover:bg-opacity-10"
 						>
 							閉じる
 						</button>

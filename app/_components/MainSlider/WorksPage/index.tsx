@@ -68,7 +68,7 @@ export default function WorksPage({
 							height={work.thumbnail.height}
 						/>
 					) : (
-						<div className="w-5 h-5 bg-gray-50" />
+						<div className="w-full h-[200px] bg-gray-50" />
 					)}
 					<div
 						className={`flex justify-between items-center ${isTheme === "dark" ? "text-gray-200" : "text-gray-800"}`}

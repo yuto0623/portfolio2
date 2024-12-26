@@ -28,9 +28,9 @@ export type Works = {
 	updatedAt: string;
 	publishedAt: string;
 	revisedAt: string;
-	thumbnail: thumbnail;
+	thumbnail?: thumbnail;
 	title: string;
-	url: string;
+	url?: string;
 	skill: string[];
 	description: string;
 };

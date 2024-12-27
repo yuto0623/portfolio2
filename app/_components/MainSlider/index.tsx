@@ -98,9 +98,7 @@ export default function MainSlider({
 					/>
 				</SwiperSlide>
 				<SwiperSlide>{page3}</SwiperSlide>
-				<SwiperSlide>
-					<p>4Page</p>
-				</SwiperSlide>
+				<SwiperSlide>{page4}</SwiperSlide>
 				<CustomPagination page={page} />
 			</Swiper>
 		</>

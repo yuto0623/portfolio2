@@ -15,6 +15,7 @@ import parse from "html-react-parser";
 import { default as NextImage } from "next/image";
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
+import Button from "../../ContactBlock/Button";
 import GlassContainer from "../../GlassContainer";
 
 export default function WorksPage({
@@ -89,13 +90,9 @@ export default function WorksPage({
 					<h3 className="text-lg mb-3">{work.title}</h3>
 					<div className="mb-3">{parse(work.description)}</div>
 					<div className="flex justify-center">
-						<button
-							type="button"
-							onClick={() => ToggleModal("")}
-							className="px-8 py-2 backdrop-filter backdrop-blur-sm bg-opacity-20 bg-clip-padding rounded-xl hover:bg-white hover:bg-opacity-10"
-						>
+						<Button type="button" onClick={() => ToggleModal("")}>
 							閉じる
-						</button>
+						</Button>
 					</div>
 				</GlassContainer>
 			))}

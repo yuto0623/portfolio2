@@ -1,3 +1,4 @@
+import Button from "./Button";
 import Input from "./Input";
 
 export default function ContactBlock() {
@@ -8,7 +9,7 @@ export default function ContactBlock() {
 				<Input type="text" placeholder="Name" />
 				<Input type="email" placeholder="Email" />
 				<textarea placeholder="Message" />
-				<button type="submit">Send</button>
+				<Button type="submit">Send</Button>
 			</form>
 		</div>
 	);

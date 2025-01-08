@@ -35,7 +35,7 @@ export default function WorksPage({
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const data = await client.getList({ endpoint: "works" });
+			const data = await fetch("/api/works").then((res) => res.json());
 			setWorks(data);
 		};
 		fetchData();

@@ -1,13 +1,13 @@
 import { createClient } from "microcms-js-sdk";
 
-const serviceDomain = process.env.NEXT_PUBLIC_SERVICE_DOMAIN;
-const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+const serviceDomain = process.env.SERVICE_DOMAIN;
+const apiKey = process.env.API_KEY;
 
 if (!serviceDomain) {
-	throw new Error("NEXT_PUBLIC_SERVICE_DOMAIN is not defined");
+	throw new Error("SERVICE_DOMAIN is not defined");
 }
 if (!apiKey) {
-	throw new Error("NEXT_PUBLIC_API_KEY is not defined");
+	throw new Error("API_KEY is not defined");
 }
 
 export const client = createClient({

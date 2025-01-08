@@ -1,5 +1,6 @@
 import Button from "./Button";
 import Input from "./Input";
+import TextArea from "./TextArea";
 
 export default function ContactBlock() {
 	return (
@@ -8,7 +9,7 @@ export default function ContactBlock() {
 			<form className="flex flex-col gap-4">
 				<Input type="text" placeholder="Name" />
 				<Input type="email" placeholder="Email" />
-				<textarea placeholder="Message" />
+				<TextArea placeholder="Message" />
 				<Button type="submit">Send</Button>
 			</form>
 		</div>

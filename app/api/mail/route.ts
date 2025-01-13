@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
 	const mailOptions = {
 		from: '"Yuto Shintani" <yuto.ryr0623@gmail.com>', // 送信者名とメールアドレスを設定
 		to: `"${name}" <${email}>`, // 送信先名とメールアドレスを設定
-		subject: "test",
+		subject: "お問い合わせ確認メール(自動送信)", // 件名を設定
 		text: message,
 	};
 

@@ -1,3 +1,4 @@
+"use client";
 import { type FormEvent, useState } from "react";
 import Button from "./Button";
 import Input from "./Input";

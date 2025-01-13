@@ -17,6 +17,7 @@
 		"microcms-js-sdk": "^3.1.2",
 		"next": "^14.2.23",
 		"next-themes": "^0.4.3",
+		"nodemailer": "^6.9.16",
 		"nuqs": "^2.2.3",
 		"r3f-perf": "^7.2.3",
 		"react": "18.3.1",
@@ -27,6 +28,7 @@
 	},
 	"devDependencies": {
 		"@types/node": "^20",
+		"@types/nodemailer": "^6.4.17",
 		"@types/react": "^18",
 		"@types/react-dom": "^18",
 		"@types/three": "^0.170.0",

@@ -1,7 +1,9 @@
 import type { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
+	const { name, email, message } = await req.json();
+
 	// SMTPトランスポートを使用してトランスポーターオブジェクトを作成
 	const transporter = nodemailer.createTransport({
 		service: "gmail",
@@ -16,9 +18,9 @@ export async function GET(req: NextRequest) {
 	// メール設定データの準備
 	const mailOptions = {
 		from: '"Yuto Shintani" <yuto.ryr0623@gmail.com>', // 送信者名とメールアドレスを設定
-		to: "miiizk06044@yahoo.co.jp",
+		to: `"${name}" <${email}>`, // 送信先名とメールアドレスを設定
 		subject: "test",
-		text: "hello",
+		text: message,
 	};
 
 	try {

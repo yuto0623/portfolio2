@@ -1,9 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
-	const { to, subject, text } = req.body;
-
+export async function GET(req: NextRequest) {
 	// SMTPトランスポートを使用してトランスポーターオブジェクトを作成
 	const transporter = nodemailer.createTransport({
 		service: "gmail",
@@ -26,8 +24,13 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
 	try {
 		// メール送信
 		const info = await transporter.sendMail(mailOptions);
-		res.status(200).json({ message: "メール送信完了", info });
+		return new Response(JSON.stringify({ message: "メール送信完了", info }), {
+			status: 200,
+		});
 	} catch (error) {
-		res.status(500).json({ message: "Error sending email", error });
+		return new Response(
+			JSON.stringify({ message: "Error sending email", error }),
+			{ status: 500 },
+		);
 	}
 }

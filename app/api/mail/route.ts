@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer";
 
-export default async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: NextApiRequest, res: NextApiResponse) {
 	const { to, subject, text } = req.body;
 
 	// SMTPトランスポートを使用してトランスポーターオブジェクトを作成

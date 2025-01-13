@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
 	// メール設定データの準備
 	const mailOptions = {
 		from: '"Yuto Shintani" <yuto.ryr0623@gmail.com>', // 送信者名とメールアドレスを設定
-		to: "yuto.ryr0623@gmail.com",
+		to: "miiizk06044@yahoo.co.jp",
 		subject: "test",
 		text: "hello",
 	};

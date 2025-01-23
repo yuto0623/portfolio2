@@ -21,41 +21,32 @@ export default function ContactBlock() {
 		formState: { errors },
 	} = useForm<Inputs>();
 
-	const [formData, setFormData] = useState({
-		name: "name",
-		email: "yuto.ryr0623@gmail.com",
-		message: "そうしんてすとおお",
-	});
-
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		console.log(data);
-		setFormData((prev) => ({
-			...prev,
-			name: data.name,
-			email: data.email,
-			message: `
-				このメールは自動送信です。
-				以下の内容でお問い合わせを受け付けました。
-				メールにてご連絡いたしますので、お待ちください。
-
-				お名前: ${data.name}
-				メールアドレス: ${data.email}
-				お問い合わせ内容: ${data.message}
-
-				----------
-				新谷 悠人
-				Email: yuto.ryr0623@gmail.com
-				----------
-			`,
-		}));
-
 		try {
 			const response = await fetch("/api/mail", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(formData),
+				body: JSON.stringify({
+					name: data.name,
+					email: data.email,
+					message: `
+このメールは自動送信です。
+以下の内容でお問い合わせを受け付けました。
+メールにてご連絡いたしますので、お待ちください。
+
+お名前: ${data.name}
+メールアドレス: ${data.email}
+お問い合わせ内容: ${data.message}
+
+----------
+新谷 悠人
+Email: yuto.ryr0623@gmail.com
+----------
+`,
+				}),
 			});
 			if (!response.ok) throw new Error("送信に失敗しました");
 			// 成功時の処理

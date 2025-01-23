@@ -1,9 +1,9 @@
 "use client";
+import { useCustomTheme } from "@/app/hooks/useCustomTheme";
 import { type FormEvent, useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
-import Button from "./Button";
-import { useCustomTheme } from "@/app/hooks/useCustomTheme";
 import TextareaAutosize from "react-textarea-autosize";
+import Button from "./Button";
 
 type Inputs = {
 	name: string;
@@ -28,21 +28,40 @@ export default function ContactBlock() {
 	});
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
-		console.log("submit");
 		console.log(data);
-		// try {
-		// 	const response = await fetch("/api/mail", {
-		// 		method: "POST",
-		// 		headers: {
-		// 			"Content-Type": "application/json",
-		// 		},
-		// 		body: JSON.stringify(formData),
-		// 	});
-		// 	if (!response.ok) throw new Error("送信に失敗しました");
-		// 	// 成功時の処理
-		// } catch (error) {
-		// 	console.error(error);
-		// }
+		setFormData((prev) => ({
+			...prev,
+			name: data.name,
+			email: data.email,
+			message: `
+				このメールは自動送信です。
+				以下の内容でお問い合わせを受け付けました。
+				メールにてご連絡いたしますので、お待ちください。
+
+				お名前: ${data.name}
+				メールアドレス: ${data.email}
+				お問い合わせ内容: ${data.message}
+
+				----------
+				新谷 悠人
+				Email: yuto.ryr0623@gmail.com
+				----------
+			`,
+		}));
+
+		try {
+			const response = await fetch("/api/mail", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(formData),
+			});
+			if (!response.ok) throw new Error("送信に失敗しました");
+			// 成功時の処理
+		} catch (error) {
+			console.error(error);
+		}
 	};
 
 	return (

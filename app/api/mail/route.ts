@@ -23,12 +23,25 @@ export async function POST(req: NextRequest) {
 		text: message,
 	};
 
+	//自分に送信するメールの設定
+	const mailOptionsToMe = {
+		from: '"Yuto Shintani" <yuto.ryr0623@gmail.com>',
+		to: "yuto.ryr0623@gmail.com",
+		replyTo: `"${name}" <${email}>`,
+		subject: "お問い合わせがありました",
+		text: message,
+	};
+
 	try {
 		// メール送信
 		const info = await transporter.sendMail(mailOptions);
-		return new Response(JSON.stringify({ message: "メール送信完了", info }), {
-			status: 200,
-		});
+		const infoToMe = await transporter.sendMail(mailOptionsToMe);
+		return new Response(
+			JSON.stringify({ message: "メール送信完了", info, infoToMe }),
+			{
+				status: 200,
+			},
+		);
 	} catch (error) {
 		return new Response(
 			JSON.stringify({ message: "Error sending email", error }),

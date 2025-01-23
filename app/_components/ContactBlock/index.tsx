@@ -2,6 +2,7 @@
 import { useCustomTheme } from "@/app/hooks/useCustomTheme";
 import { type FormEvent, useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
+import { DNA } from "react-loader-spinner";
 import TextareaAutosize from "react-textarea-autosize";
 import Button from "./Button";
 
@@ -13,6 +14,7 @@ type Inputs = {
 
 export default function ContactBlock() {
 	const isTheme = useCustomTheme();
+	const [isSending, setIsSending] = useState(false);
 
 	const {
 		register,
@@ -22,6 +24,7 @@ export default function ContactBlock() {
 	} = useForm<Inputs>();
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
+		setIsSending(true);
 		console.log(data);
 		try {
 			const response = await fetch("/api/mail", {
@@ -41,16 +44,17 @@ export default function ContactBlock() {
 メールアドレス: ${data.email}
 お問い合わせ内容: ${data.message}
 
-----------
+---------------------------
 新谷 悠人
 Email: yuto.ryr0623@gmail.com
-----------
+---------------------------
 `,
 				}),
 			});
+			setIsSending(false);
 			if (!response.ok) throw new Error("送信に失敗しました");
-			// 成功時の処理
 		} catch (error) {
+			setIsSending(false);
 			console.error(error);
 		}
 	};
@@ -93,7 +97,23 @@ Email: yuto.ryr0623@gmail.com
 					}`}
 				/>
 				{errors.message && <span>This field is required</span>}
-				<Button type="submit">Send</Button>
+				<Button type="submit" disabled={isSending}>
+					{isSending ? (
+						<div className="flex justify-center">
+							Sending...
+							<DNA
+								visible={true}
+								height="30"
+								width="80"
+								ariaLabel="dna-loading"
+								wrapperStyle={{}}
+								wrapperClass="dna-wrapper"
+							/>
+						</div>
+					) : (
+						"Send"
+					)}
+				</Button>
 			</form>
 		</div>
 	);

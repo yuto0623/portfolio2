@@ -17,6 +17,8 @@ export const metadata: Metadata = {
 	description: "新谷悠人のポートフォリオサイトです。",
 };
 
+export const fetchCache = "default-no-store";
+
 export default function RootLayout({
 	children,
 }: Readonly<{

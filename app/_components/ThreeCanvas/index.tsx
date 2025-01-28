@@ -25,7 +25,7 @@ export default function ThreeCanvas() {
 					camera={{ position: [0, 0, 5] }}
 					dpr={[1, 1.5]}
 				>
-					<Perf />
+					{/* <Perf /> */}
 					<BgEffect />
 					<Environment preset="studio" />
 					<ambientLight intensity={0.1} />

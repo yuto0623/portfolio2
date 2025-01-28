@@ -28,11 +28,7 @@ export default function RootLayout({
 		<html lang="ja" suppressHydrationWarning>
 			<body className={`${MontserratSubrayadaRegular.variable} antialiased`}>
 				<ThemeProvider>
-					<NuqsAdapter>
-						<Header />
-						{children}
-						<ThemeButton />
-					</NuqsAdapter>
+					<NuqsAdapter>{children}</NuqsAdapter>
 				</ThemeProvider>
 			</body>
 		</html>

@@ -12,13 +12,7 @@ export default function Home() {
 	return (
 		<>
 			<Header />
-			<Suspense
-				fallback={
-					<p className="fixed w-full h-full flex items-center justify-center">
-						Loading...
-					</p>
-				}
-			>
+			<Suspense fallback={null}>
 				<Background />
 			</Suspense>
 			<main>

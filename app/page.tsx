@@ -16,16 +16,8 @@ export default function Home() {
 				<Suspense fallback={null}>
 					<MainSlider
 						page1={<Scroll />}
-						page3={
-							<GlassContainer className="fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 max-w-[600px] w-[80%] mx-auto">
-								<AboutBlock />
-							</GlassContainer>
-						}
-						page4={
-							<GlassContainer className="fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 max-w-[600px] w-[80%] mx-auto">
-								<ContactBlock />
-							</GlassContainer>
-						}
+						page3={<AboutBlock />}
+						page4={<ContactBlock />}
 					/>
 				</Suspense>
 			</main>

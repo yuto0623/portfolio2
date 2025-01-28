@@ -1,9 +1,10 @@
 "use client";
 import { useCustomTheme } from "@/app/hooks/useCustomTheme";
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { DNA } from "react-loader-spinner";
 import TextareaAutosize from "react-textarea-autosize";
+import GlassContainer from "../GlassContainer";
 import Button from "./Button";
 
 type Inputs = {
@@ -15,6 +16,11 @@ type Inputs = {
 export default function ContactBlock() {
 	const isTheme = useCustomTheme();
 	const [isSending, setIsSending] = useState(false);
+	const [isHidden, setIsHidden] = useState(true);
+
+	useEffect(() => {
+		setIsHidden(false);
+	});
 
 	const {
 		register,
@@ -60,7 +66,9 @@ Email: yuto.ryr0623@gmail.com
 	};
 
 	return (
-		<div>
+		<GlassContainer
+			className={`fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 max-w-[600px] w-[80%] mx-auto ${isHidden ? "hidden" : "block"}`}
+		>
 			<h2 className="text-3xl mb-6">CONTACT</h2>
 			<form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
 				<input
@@ -115,6 +123,6 @@ Email: yuto.ryr0623@gmail.com
 					)}
 				</Button>
 			</form>
-		</div>
+		</GlassContainer>
 	);
 }

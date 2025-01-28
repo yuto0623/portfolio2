@@ -1,6 +1,18 @@
+"use client";
+import { useEffect, useState } from "react";
+import GlassContainer from "../GlassContainer";
+
 export default function AboutBlock() {
+	const [isHidden, setIsHidden] = useState(true);
+
+	useEffect(() => {
+		setIsHidden(false);
+	});
+
 	return (
-		<div className="">
+		<GlassContainer
+			className={`fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 max-w-[600px] w-[80%] mx-auto ${isHidden ? "hidden" : "block"}`}
+		>
 			<div className="mb-12">
 				<ruby>新谷 悠人</ruby>
 				<h2 className="text-2xl font-bold">YUTO SHINTANI</h2>
@@ -14,6 +26,6 @@ export default function AboutBlock() {
 				<p>現在の会社ではWEB関係を担当。</p>
 				<p>趣味はプログラミング、ゲーム、ツーリング、ドライブ、写真。</p>
 			</div>
-		</div>
+		</GlassContainer>
 	);
 }

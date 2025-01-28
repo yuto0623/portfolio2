@@ -116,7 +116,7 @@ export default function WorksPage({
 					<spotLight position={[20, 20, 10]} penumbra={1} angle={0.2} />
 					<directionalLight color={"white"} position={[0, 5, 5]} />
 					<ScrollControls
-						pages={works ? works.contents.length * 0.5 : 0}
+						pages={works ? works.contents.length * 0.45 : 0}
 						damping={0.1}
 						horizontal
 					>
@@ -134,6 +134,8 @@ export default function WorksPage({
 								const baseSize = 2; //基準サイズ
 								const width = baseSize * aspectRatio;
 								const height = baseSize;
+								const spacing = 4; // 画像間の固定間隔
+								const xPosition = spacing * (width < 768 ? index : index + 1);
 
 								// タイトルを省略
 								const truncateTitle = (title: string, maxLength = 20) => {
@@ -160,11 +162,7 @@ export default function WorksPage({
 										{work.thumbnail ? (
 											<Image
 												url={work.thumbnail.url}
-												position={[
-													2 * (2 * (width < 768 ? index : index + 1)),
-													0.2,
-													0,
-												]}
+												position={[xPosition, 0.2, 0]}
 												onClick={() => ToggleModal(work.id)}
 											>
 												<planeGeometry args={[width, height]} />
@@ -172,11 +170,7 @@ export default function WorksPage({
 										) : (
 											// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 											<mesh
-												position={[
-													2 * (2 * (width < 768 ? index : index + 1)),
-													0.2,
-													0,
-												]}
+												position={[xPosition, 0.2, 0]}
 												onClick={() => ToggleModal(work.id)}
 											>
 												<planeGeometry args={[width, height]} />

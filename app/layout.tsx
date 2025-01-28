@@ -13,8 +13,8 @@ const MontserratSubrayadaRegular = localFont({
 });
 
 export const metadata: Metadata = {
-	title: "Yuto Shintani's portfolio",
-	description: "Yuto Shintani's portfolio",
+	title: "Yuto Shintani | 新谷 悠人 Portfolio",
+	description: "新谷悠人のポートフォリオサイトです。",
 };
 
 export default function RootLayout({

@@ -12,13 +12,23 @@ export default function Home() {
 	return (
 		<>
 			<Header />
-			<Background />
+			<Suspense
+				fallback={
+					<p className="fixed w-full h-full flex items-center justify-center">
+						Loading...
+					</p>
+				}
+			>
+				<Background />
+			</Suspense>
 			<main>
-				<MainSlider
-					page1={<Scroll />}
-					page3={<AboutBlock />}
-					page4={<ContactBlock />}
-				/>
+				<Suspense fallback={null}>
+					<MainSlider
+						page1={<Scroll />}
+						page3={<AboutBlock />}
+						page4={<ContactBlock />}
+					/>
+				</Suspense>
 			</main>
 			<ThemeButton />
 		</>

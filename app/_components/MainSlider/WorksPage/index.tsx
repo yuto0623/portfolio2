@@ -32,6 +32,7 @@ export default function WorksPage({
 	const [works, setWorks] = useState<WorksList>();
 	const [isModal, setIsModal] = useState<string | null>(null);
 	const isTheme = useCustomTheme();
+	const { width } = useWindowSize();
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -51,6 +52,32 @@ export default function WorksPage({
 		} else {
 			setIsModal(id);
 		}
+	};
+
+	const calculatePages = () => {
+		if (!works) return 0;
+		if (width < 280) return works.contents.length * 1.3;
+		if (width < 305) return works.contents.length * 1.2;
+		if (width < 330) return works.contents.length * 1.1;
+		if (width < 380) return works.contents.length * 1;
+		if (width < 430) return works.contents.length * 0.9;
+		if (width < 490) return works.contents.length * 0.8;
+		if (width < 530) return works.contents.length * 0.7;
+		if (width < 570) return works.contents.length * 0.66;
+		if (width < 630) return works.contents.length * 0.62;
+		if (width < 670) return works.contents.length * 0.57;
+		if (width < 740) return works.contents.length * 0.54;
+		if (width < 768) return works.contents.length * 0.5;
+		if (width < 860) return works.contents.length * 0.67;
+		if (width < 940) return works.contents.length * 0.6;
+		if (width < 1050) return works.contents.length * 0.56;
+		if (width < 1130) return works.contents.length * 0.52;
+		if (width < 1250) return works.contents.length * 0.48;
+		if (width < 1350) return works.contents.length * 0.44;
+		if (width < 1450) return works.contents.length * 0.42;
+		if (width < 1600) return works.contents.length * 0.4;
+		if (width < 1700) return works.contents.length * 0.38;
+		return works.contents.length * 0.33;
 	};
 
 	return (
@@ -115,11 +142,7 @@ export default function WorksPage({
 					<ambientLight intensity={0.1} />
 					<spotLight position={[20, 20, 10]} penumbra={1} angle={0.2} />
 					<directionalLight color={"white"} position={[0, 5, 5]} />
-					<ScrollControls
-						pages={works ? works.contents.length * 0.45 : 0}
-						damping={0.1}
-						horizontal
-					>
+					<ScrollControls pages={calculatePages()} damping={0.1} horizontal>
 						<Scroll>
 							<ScrollCheck
 								stopScroll={stopScroll}

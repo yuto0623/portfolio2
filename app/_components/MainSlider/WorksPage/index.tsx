@@ -76,7 +76,7 @@ export default function WorksPage({
 						</div>
 					)}
 					<div
-						className={`flex justify-between items-center ${isTheme === "dark" ? "text-gray-200" : "text-gray-800"}`}
+						className={`flex justify-between items-center mb-4 ${isTheme === "dark" ? "text-gray-200" : "text-gray-800"}`}
 					>
 						{work.url ? (
 							<Link href={work.url} target="_blank">
@@ -179,6 +179,15 @@ export default function WorksPage({
 												<meshBasicMaterial
 													color={isTheme === "dark" ? "#ffffff" : "#000000"}
 												/>
+												<Text
+													position={[0, 0, 0]}
+													fontSize={0.2}
+													color={isTheme === "dark" ? "#000000" : "#ffffff"}
+													anchorX="center"
+													anchorY="middle"
+												>
+													No Image
+												</Text>
 											</mesh>
 										)}
 									</Fragment>

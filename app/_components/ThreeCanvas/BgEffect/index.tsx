@@ -1,12 +1,13 @@
 import { gsap } from "gsap";
 import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
-import type { Color } from "three";
+import { Color } from "three";
 
 export default function BgEffect() {
-	const [isTheme, setIsTheme] = useState<string | undefined>("");
 	const { theme, resolvedTheme } = useTheme();
-	const bgRef = useRef<Color>(null);
+	const initialTheme = resolvedTheme === "system" ? theme : resolvedTheme;
+	const [isTheme, setIsTheme] = useState<string | undefined>(initialTheme);
+	const bgRef = useRef(new Color(initialTheme === "dark" ? 0 : 1));
 
 	useEffect(() => {
 		let currentTheme: string | undefined;

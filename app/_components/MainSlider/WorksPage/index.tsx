@@ -115,7 +115,11 @@ export default function WorksPage({
 					<ambientLight intensity={0.1} />
 					<spotLight position={[20, 20, 10]} penumbra={1} angle={0.2} />
 					<directionalLight color={"white"} position={[0, 5, 5]} />
-					<ScrollControls pages={2} damping={0.1} horizontal>
+					<ScrollControls
+						pages={works ? works.contents.length * 0.5 : 0}
+						damping={0.1}
+						horizontal
+					>
 						<Scroll>
 							<ScrollCheck
 								stopScroll={stopScroll}

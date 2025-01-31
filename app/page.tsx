@@ -6,14 +6,14 @@ import Header from "./_components/Header";
 import MainSlider from "./_components/MainSlider";
 import Scroll from "./_components/MainSlider/Scroll";
 import ThemeButton from "./_components/ThemeButton";
-import Background from "./_components/ThreeCanvas";
+import ThreeCanvas from "./_components/ThreeCanvas";
 
 export default function Home() {
 	return (
 		<>
 			<Header />
 			<Suspense fallback={null}>
-				<Background />
+				<ThreeCanvas />
 			</Suspense>
 			<main>
 				<Suspense fallback={null}>
